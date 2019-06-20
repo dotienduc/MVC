@@ -1,0 +1,19 @@
+{
+    "name": "admin/mvc",
+    "description": "mvc",
+    "type": "no",
+    "license": "no",
+    "minimum-stability": "dev",
+    "require": {
+        "jenssegers/blade": "dev-master",
+        "fzaninotto/faker": "^1.9@dev"
+    },
+    "config": {
+        "optimize-autoloader": true
+    },
+    "autoload": {
+    	"psr-4": {
+            "App\\": "app/"
+        }
+    }
+}
