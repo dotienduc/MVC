@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 20, 2019 at 05:37 PM
+-- Generation Time: Jun 25, 2019 at 11:36 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.1.27
 
@@ -34,8 +34,6 @@ CREATE TABLE `banner` (
   `image` varchar(150) DEFAULT NULL,
   `text1` varchar(150) DEFAULT NULL,
   `text2` varchar(150) DEFAULT NULL,
-  `text3` varchar(150) DEFAULT NULL,
-  `text4` varchar(150) DEFAULT NULL,
   `status` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -43,10 +41,10 @@ CREATE TABLE `banner` (
 -- Dumping data for table `banner`
 --
 
-INSERT INTO `banner` (`id`, `name`, `image`, `text1`, `text2`, `text3`, `text4`, `status`) VALUES
-(1, 'Haylie Brown', '1.jpg', 'Et nobis non reiciendis.', 'Qui deserunt nesciunt enim.', 'Hic rerum ratione recusandae.', 'Voluptas vero velit.', 1),
-(2, 'Mrs. Vivienne Adams Jr.', '1.jpg', 'Quod voluptatum.', 'Velit unde maiores aut.', 'Nisi enim mollitia possimus.', 'Voluptatum ut cumque.', 1),
-(3, 'Prof. Josefa Bailey', '1.jpg', 'Eaque odit quia.', 'Odit asperiores provident id qui.', 'Dolorem excepturi iste.', 'Similique a hic itaque.', 1);
+INSERT INTO `banner` (`id`, `name`, `image`, `text1`, `text2`, `status`) VALUES
+(1, 'Haylie Brown', '1.jpg', 'Et nobis non reiciendis.', 'Qui deserunt nesciunt enim.', 1),
+(2, 'Mrs. Vivienne Adams Jr.', '2.jpg', 'Quod voluptatum.', 'Velit unde maiores aut.', 1),
+(3, 'Prof. Josefa Bailey', '3.jpg', 'Eaque odit quia.', 'Odit asperiores provident id qui.', 1);
 
 -- --------------------------------------------------------
 
@@ -59,10 +57,18 @@ CREATE TABLE `bills` (
   `id_customer` int(8) DEFAULT NULL,
   `date_order` date DEFAULT NULL,
   `total` float DEFAULT NULL,
-  `note` text,
+  `note` text CHARACTER SET utf8 COLLATE utf8_vietnamese_ci,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `status` int(8) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `bills`
+--
+
+INSERT INTO `bills` (`id`, `id_customer`, `date_order`, `total`, `note`, `created_at`, `updated_at`, `status`) VALUES
+(2, 2, '2019-06-21', 205, 'sdasdasdsad', '2019-06-25 04:34:14', '0000-00-00 00:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -79,6 +85,14 @@ CREATE TABLE `bill_detail` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `bill_detail`
+--
+
+INSERT INTO `bill_detail` (`id`, `id_bill`, `id_product`, `quantity`, `price`, `created_at`, `updated_at`) VALUES
+(2, 2, 6, 1, 150, '2019-06-21 03:26:28', '0000-00-00 00:00:00'),
+(3, 2, 5, 1, 50, '2019-06-21 03:26:28', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -168,16 +182,23 @@ INSERT INTO `comments` (`id`, `parent_commnet_id`, `comment`, `comment_sender_na
 
 CREATE TABLE `customers` (
   `id` int(8) NOT NULL,
-  `fname` varchar(50) DEFAULT NULL,
-  `lname` varchar(50) DEFAULT NULL,
-  `address` varchar(255) DEFAULT NULL,
+  `fname` varchar(50) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL,
+  `lname` varchar(50) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL,
+  `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL,
   `email` varchar(150) DEFAULT NULL,
-  `gender` varchar(10) DEFAULT NULL,
+  `gender` varchar(10) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL,
   `phone` varchar(15) DEFAULT NULL,
-  `note` text,
+  `note` text CHARACTER SET utf8 COLLATE utf8_vietnamese_ci,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `customers`
+--
+
+INSERT INTO `customers` (`id`, `fname`, `lname`, `address`, `email`, `gender`, `phone`, `note`, `created_at`, `updated_at`) VALUES
+(2, 'Kudo', 'Shinichi', 'Kí túc xá Đại học Công Nghiệp Hà Nội', 'Kudo@gmail.com', 'nam', '0936036716', 'sdasdasdsad', '2019-06-25 02:47:04', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -226,15 +247,18 @@ CREATE TABLE `examination_schedule` (
   `id_doctor` int(11) DEFAULT NULL,
   `id_timeserving` int(11) DEFAULT NULL,
   `id_subject` int(11) DEFAULT NULL,
-  `status` int(8) DEFAULT NULL
+  `status` int(8) DEFAULT NULL,
+  `confirmed` int(11) DEFAULT NULL,
+  `confirm_code` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `examination_schedule`
 --
 
-INSERT INTO `examination_schedule` (`id`, `first_name`, `last_name`, `email`, `phone`, `message`, `id_doctor`, `id_timeserving`, `id_subject`, `status`) VALUES
-(7, 'David123', 'Backham', 'mayhajnhj1998@gmail.com', '232423', 'dgdgdf', 1, 2, 1, 0);
+INSERT INTO `examination_schedule` (`id`, `first_name`, `last_name`, `email`, `phone`, `message`, `id_doctor`, `id_timeserving`, `id_subject`, `status`, `confirmed`, `confirm_code`) VALUES
+(20, 'asda', 'dasdas', 'mayhajnhj1998@gmail.com', '4444444444', 'sasa', 1, 2, 1, 0, 1, 0),
+(21, 'asda', 'dasdas', 'mayhajnhj1998@gmail.com', '4444444444', '1212', 1, 2, 1, 0, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -462,13 +486,13 @@ ALTER TABLE `banner`
 -- AUTO_INCREMENT for table `bills`
 --
 ALTER TABLE `bills`
-  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `bill_detail`
 --
 ALTER TABLE `bill_detail`
-  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `blog`
@@ -492,7 +516,7 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `doctor`
@@ -504,7 +528,7 @@ ALTER TABLE `doctor`
 -- AUTO_INCREMENT for table `examination_schedule`
 --
 ALTER TABLE `examination_schedule`
-  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `products`
