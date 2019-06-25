@@ -123,4 +123,9 @@ class AppointentController extends Controller
 
 		echo json_encode($data);
 	}
+
+	public function cofirmEmail($id, $token)
+	{
+		$this->appointent->confirm($id, $token);
+	}
 }

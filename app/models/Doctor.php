@@ -102,14 +102,34 @@ class Doctor implements DoctorIplm
 
 	public function insertAppoinment(
 					$fName, $lName, $email, $phone,
-					$message, $id_doctor, $id_timeserving, $id_subject, $status = 0
+					$message, $id_doctor, $id_timeserving, $id_subject,
+					$confirmCode, $status = 0, $confirmed = 0
 					)
 	{
 		$sql = "insert into 
 			examination_schedule(first_name, last_name, email, 
-							phone, message, id_doctor, id_timeserving, id_subject, status)
+							phone, message, id_doctor, id_timeserving,
+							 id_subject, status, confirmed, confirm_code)
 			values('".$fName."', '".$lName."', '".$email."', '".$phone."', '".$message."',
-					 '".$id_doctor."', '".$id_timeserving."' , '".$id_subject."', '".$status."')";
+					 '".$id_doctor."', '".$id_timeserving."' , '".$id_subject."',
+					  '".$status."', '".$confirmed."', '".$confirmCode."')";
 		mysqli_query($this->conn, $sql);
+
+		$last_id = mysqli_insert_id($this->conn);
+		return $last_id;
+	}
+
+	public function getBanner()
+	{
+		$sql = "select * from banner where status = '1' order by id desc";
+		$rs =mysqli_query($this->conn, $sql);
+
+		$result = array();
+		while($row = mysqli_fetch_array($rs))
+		{
+			$result[] = $row;
+		}
+
+		return $result;
 	}
 }

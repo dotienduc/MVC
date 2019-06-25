@@ -14,6 +14,7 @@ interface DoctorIplm
 	public function getListSpeacialist();
 	public function insertAppoinment(
 					$fName, $lName, $email, $phone,
-					$message, $id_doctor, $id_timeserving, $id_subject, $status = 0
+					$message, $id_doctor, $id_timeserving, $id_subject,
+					$status = 0, $confirmCode, $confirmed = 0
 					);
 }

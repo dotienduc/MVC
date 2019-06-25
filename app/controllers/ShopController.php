@@ -46,7 +46,10 @@ class ShopController extends Controller
 			}
 		}
 
-		$items = $_SESSION['shopping_cart'];
+		$items = [];
+		if(isset($_SESSION['shopping_cart'])){
+			$items = $_SESSION['shopping_cart'];
+		}
 
 		$total = 0;
 
@@ -61,8 +64,21 @@ class ShopController extends Controller
 	//Function display form checkout
 	public function checkout()
 	{
+		$items = [];
+		if(isset($_SESSION['shopping_cart'])){
+			$items = $_SESSION['shopping_cart'];
+		}
+
+		$total = 0;
+
+		$shipping = 5;
+
+		foreach ($items as $value) {
+			$total = $total + ($value['product_quantity'] * $value['product_price']);
+		}
+
 		$blade = new Blade('../app/views/home', '../app/cache');
-		echo $blade->make('checkout');
+		echo $blade->make('checkout', ['items' => $items, 'total' => $total, 'shipping' => $shipping]);
 	}
 
 	//Function display info detail product
@@ -178,5 +194,113 @@ class ShopController extends Controller
 			);
 			echo json_encode($output);
 		}
+	}
+
+	//Function pay bill
+	public function payBill()
+	{
+		$first_name = $_POST['first_name'];
+		$last_name = $_POST['last_name'];
+		$phone_number = $_POST['phone_number'];
+		$gender = $_POST['gender'];
+		$address = $_POST['address'];
+		$email_address = $_POST['email_address'];
+		$note = $_POST['note'];
+		$hidden_total = $_POST['hidden_total'];
+
+		//Action pay order from model Product
+		$rs = $this->product->actionPay($first_name, $last_name, $phone_number, $gender, $address, $email_address, $note, $hidden_total);
+	}
+
+	//Function display list order 
+	public function listOrder()
+	{
+		//Get list order from model Product
+		$listOrder = $this->product->getListOrder();
+
+		// echo "<pre>";
+		// print_r($listOrder);
+		// die();
+
+		$blade = new Blade('../app/views/admin', '../app/cache');
+		echo $blade->make('ListOfInvoices', ['listOrder' => $listOrder]);
+	}
+
+	//Function display detail Order
+	public function detailOrder()
+	{
+		$id = $_POST['id_bill'];
+		$detailOrder = $this->product->getDetailOrder($id);
+
+		// echo "<pre>";
+		// print_r($detailOrder);
+		// die();
+		$order = '';
+		$customerDetail = '';
+		$order_detail = '';
+		$total = 0;
+
+		foreach($detailOrder as $row)
+		{
+			$customerDetail = '  
+			<label>Tên khách hàng : '.$row["fname"].''.$row["lname"].'</label>  
+			<p>Địa chỉ : '.$row["address"].'</p>  
+			<p>Số điện thoại : '.$row["phone"].'</p>  
+			<p>Email : '.$row["email"].'</p> 
+			<p>Ghi chú : '.$row["note"].'</p>   
+			';
+
+			$order_detail .= "  
+			<tr>  
+			<td>".$row["product_name"]."</td>  
+			<td>".$row["quantity"]."</td>  
+			<td>".$row["price"]."</td>  
+			<td>".number_format($row["quantity"] * $row["price"], 2)."</td>  
+			</tr>  
+			";  
+			$total = $total + ($row["quantity"] * $row["price"]);
+		}
+		$order = '
+		<div class="table-responsive">  
+			<table class="table">  
+				<tr>  
+					<td><label>Thông tin khách hàng</label></td>  
+				</tr>  
+				<tr>  
+					<td>'.$customerDetail.'</td>  
+				</tr>  
+				<tr>  
+					<td><label>Thông tin hóa đơn</label></td>  
+				</tr>  
+				<tr>  
+					<td>  
+						<table class="table table-bordered">  
+						<tr>  
+							<th width="50%">Tên sản phẩm</th>  
+							<th width="15%">Số lượng</th>  
+							<th width="15%">Giá</th>  
+							<th width="20%">Tổng</th>  
+						</tr>  
+						'.$order_detail.'  
+						<tr>  
+							<td colspan="3" align="right"><label>Tổng hóa đơn</label></td>  
+							<td>'.number_format($total, 2).'</td>  
+						</tr>  
+						</table>  
+					</td>  
+				</tr>  
+			</table>  
+		</div>
+		';
+
+		echo json_encode($order);
+	}
+
+	public function shipping()
+	{
+		$id_bill = $_POST['id_bill'];
+		$status = $_POST['status'];
+
+		$this->product->updateStatus($id_bill, $status);
 	}
 }

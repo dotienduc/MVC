@@ -23,30 +23,7 @@
 							<li role="presentation" class="active">
 								<a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Step 1">
 									<span class="round-tab">
-										<i class="fa fa-map-o"></i> Billing Address
-									</span>
-								</a>
-							</li>
-							<li role="presentation">
-								<a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="Step 2">
-									<span class="round-tab">
-										<i class="fa fa-cc-amex"></i> Payment Methods
-									</span>
-								</a>
-							</li>
-							<li role="presentation">
-								<a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="Step 3">
-									<span class="round-tab">
-										<i class="fa fa-gg"></i>  Apply Coupon
-
-									</span>
-								</a>
-							</li>
-
-							<li role="presentation">
-								<a href="#complete" data-toggle="tab" aria-controls="complete" role="tab" title="Complete">
-									<span class="round-tab">
-										<i class="fa fa-check"></i>
+										<i class="fa fa-map-o"></i> Địa chỉ thanh toán
 									</span>
 								</a>
 							</li>
@@ -56,184 +33,58 @@
 					<div class="tab-content">
 						<div class="tab-pane active" role="tabpanel" id="step1">
 							<div class="panel panel-info panel-border">
-								<div class="panel-heading panel-bg"><i class="fa fa-map-o"></i> Shipping Address</div>
-								<div class="panel-body">
-									<div class="form-group">
-										<div class="col-md-6 col-xs-12">
-											<strong>First Name:</strong>
-											<input type="text" name="first_name" class="form-control" placeholder="Your Frst Name" value="" />
+								<div class="panel-heading panel-bg"><i class="fa fa-map-o"></i> Địa chỉ giao hàng</div>
+								<form action="" method="POST" id="form-checkout">
+									<div class="panel-body">
+										<div class="form-group">
+											<div class="col-md-6 col-xs-12">
+												<strong>Họ:</strong>
+												<input type="text" name="first_name" class="form-control" placeholder="Họ của bạn" value="" />
+											</div>
+											<div class="span1"></div>
+											<div class="col-md-6 col-xs-12">
+												<strong>Tên:</strong>
+												<input type="text" name="last_name" class="form-control" placeholder="Tên của bạn"  value="" />
+											</div>
 										</div>
-										<div class="span1"></div>
-										<div class="col-md-6 col-xs-12">
-											<strong>Last Name:</strong>
-											<input type="text" name="last_name" class="form-control" placeholder="Your Last Name"  value="" />
+										<div class="form-group">
+											<div class="col-md-6 col-xs-12">
+												<strong>Số điện thoại:</strong>
+												<input type="text" name="phone_number" placeholder="Số điện thoại của bạn"  class="form-control" value="" />
+											</div>
+											<div class="span1"></div>
+											<div class="col-md-6 col-xs-12">
+												<strong>Giới tính:</strong>
+												<select name="gender" id="gender" class="form-control" required="required">
+													<option value="">Chọn giới tính</option>
+													<option value="nam">Nam</option>
+													<option value="nữ">Nữ</option>
+												</select>
+											</div>
 										</div>
-									</div>
-									<div class="form-group">
-										<div class="col-md-12"><strong>Address:</strong></div>
-										<div class="col-md-12">
-											<input type="text" name="address" class="form-control" placeholder="Your Address"  value="" />
+										<div class="form-group">
+											<div class="col-md-12"><strong>Địa chỉ:</strong></div>
+											<div class="col-md-12">
+												<input type="text" name="address" class="form-control" placeholder="Địa chỉ nơi bạn"  value="" />
+											</div>
 										</div>
-									</div>
-									<div class="form-group">
-										<div class="col-md-12"><strong>Country:</strong></div>
-										<div class="col-md-12">
-											<input type="text" class="form-control" name="country" value="" />
+										<div class="form-group">
+											<div class="col-md-12"><strong>Thư điện tử:</strong></div>
+											<div class="col-md-12"><input type="text" name="email_address"  placeholder="Hòm thư của bạn"  class="form-control" value="" /></div>
 										</div>
-									</div>
-									<div class="form-group">
-										<div class="col-md-12"><strong>City:</strong></div>
-										<div class="col-md-12">
-											<input type="text" name="city" class="form-control" placeholder="Your City"  value="" />
+										<div class="form-group">
+											<div class="col-md-12"><strong>Ghi chú:</strong></div>
+											<div class="col-md-12"><input type="text" name="note"  placeholder="Ghi chú của bạn"  class="form-control" value="" /></div>
 										</div>
-									</div>
-									<div class="form-group">
-										<div class="col-md-12"><strong>State:</strong></div>
-										<div class="col-md-12">
-											<input type="text" name="state" class="form-control" placeholder="Your State"  value="" />
-										</div>
-									</div>
-									<div class="form-group">
-										<div class="col-md-12"><strong>Zip / Postal Code:</strong></div>
-										<div class="col-md-12">
-											<input type="text" name="zip_code" class="form-control" placeholder="Your Zip Code" value="" />
-										</div>
-									</div>
-									<div class="form-group">
-										<div class="col-md-12"><strong>Phone Number:</strong></div>
-										<div class="col-md-12"><input type="text" name="phone_number" placeholder="Your Phone Number"  class="form-control" value="" /></div>
-									</div>
-									<div class="form-group">
-										<div class="col-md-12"><strong>Email Address:</strong></div>
-										<div class="col-md-12"><input type="text" name="email_address"  placeholder="Your Email"  class="form-control" value="" /></div>
-									</div>
-									<div class="form-group">
-										<div class="col-md-12">
-											<button type="button" class="btn btn-theme btn-block">Save and continue</button>
+										<div class="form-group">
+											<div class="col-md-12">
+												<input type="hidden" name="hidden_total" id="hidden_total" value="{{ $total + $shipping }}">
+												<button type="submit" class="btn btn-theme btn-block">Save and continue</button>
+											</div>
 										</div>
 									</div>
-								</div>
-
+								</form>
 							</div>
-						</div>
-						<div class="tab-pane" role="tabpanel" id="step2">
-							<!--CREDIT CART PAYMENT-->
-							<div class="panel panel-info panel-border">
-								<div class="panel-heading panel-bg"><span><i class="fa fa-lock"></i></span> Secure Payment</div>
-								<div class="panel-body">
-									<div class="form-group">
-										<div class="col-md-12"><strong>Card Type:</strong></div>
-										<div class="col-md-12">
-											<select id="CreditCardType" name="CreditCardType" class="form-control">
-												<option value="5">Visa</option>
-												<option value="6">MasterCard</option>
-												<option value="7">American Express</option>
-												<option value="8">Discover</option>
-											</select>
-										</div>
-									</div>
-									<div class="form-group">
-										<div class="col-md-12"><strong>Credit Card Number:</strong></div>
-										<div class="col-md-12"><input type="text" class="form-control" name="car_number" value="" placeholder="Type Your Credit Card Number" /></div>
-									</div>
-									<div class="form-group">
-										<div class="col-md-12"><strong>Card CVV:</strong></div>
-										<div class="col-md-12"><input type="text" placeholder="Type Your Card CVV Number" class="form-control" name="car_code" value="" /></div>
-									</div>
-									<div class="form-group">
-										<div class="col-md-12">
-											<strong>Expiration Date</strong>
-										</div>
-										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-											<select class="form-control" name="">
-												<option value="">Month</option>
-												<option value="01">01</option>
-												<option value="02">02</option>
-												<option value="03">03</option>
-												<option value="04">04</option>
-												<option value="05">05</option>
-												<option value="06">06</option>
-												<option value="07">07</option>
-												<option value="08">08</option>
-												<option value="09">09</option>
-												<option value="10">10</option>
-												<option value="11">11</option>
-												<option value="12">12</option>
-											</select>
-										</div>
-										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-											<select class="form-control" name="">
-												<option value="">Year</option>
-												<option value="2015">2015</option>
-												<option value="2016">2016</option>
-												<option value="2018">2018</option>
-												<option value="2018">2018</option>
-												<option value="2019">2019</option>
-												<option value="2020">2020</option>
-												<option value="2021">2021</option>
-												<option value="2022">2022</option>
-												<option value="2023">2023</option>
-												<option value="2024">2024</option>
-												<option value="2025">2025</option>
-											</select>
-										</div>
-									</div>
-									<div class="form-group">
-										<div class="col-md-12 margin-bottom-10">
-											<p>Pay secure using your credit card.</p>
-										</div>
-										<div class="col-md-12 margin-bottom-30">
-											<ul class="cards">
-												<li class="visa hand">Visa</li>
-												<li class="mastercard hand">MasterCard</li>
-												<li class="amex hand">Amex</li>
-											</ul>
-											<div class="clearfix"></div>
-										</div>
-									</div>
-									<div class="form-group">
-										<div class="col-md-12">
-											<button type="button" class="btn btn-theme btn-block">Save and continue</button>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!--CREDIT CART PAYMENT END-->
-						</div>
-						<div class="tab-pane" role="tabpanel" id="step3">
-
-							<!--CREDIT CART PAYMENT-->
-							<div class="panel panel-info panel-border">
-								<div class="panel-heading panel-bg"><span><i class="fa fa-gg"></i></span>   Apply Coupon</div>
-								<div class="panel-body">
-									<div class="form-group">
-										<div class="col-md-12"><strong>Apply Coupon:</strong></div>
-										<div class="col-md-12"><input type="text" class="form-control" name="car_number" value="" placeholder="Type Your Coupon Number" /></div>
-									</div>
-									<div class="form-group">
-										<div class="col-md-12">
-											<button type="button" class="btn btn-black btn-block margin-bottom-10 text-uppercase">Skip and continue</button>
-										</div>
-									</div>
-									<div class="form-group">
-										<div class="col-md-12">
-											<button type="button" class="btn btn-theme btn-block">Save and continue</button>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!--CREDIT CART PAYMENT END-->
-						</div>
-						<div class="tab-pane" role="tabpanel" id="complete">
-							<!--CREDIT CART PAYMENT-->
-							<div class="panel panel-info panel-border">
-								<div class="panel-heading panel-bg"><span><i class="fa fa-check"></i></span>   Complete</div>
-								<div class="panel-body">
-									<h3>Complete</h3>
-									<p>You have successfully completed all Shopping.</p>
-								</div>
-							</div>
-							<!--CREDIT CART PAYMENT END-->
 						</div>
 						<div class="clearfix"></div>
 					</div>
@@ -242,63 +93,41 @@
 			<div class="col-md-6 form-horizontal">
 				<div class="panel panel-info panel-border margin-top-none">
 					<div class="panel-heading panel-bg">
-						<i class="fa fa-television"></i> Review Order <div class="pull-right"></div>
+						<i class="fa fa-television"></i> Xem hóa đơn <div class="pull-right"></div>
 					</div>
 					<div class="panel-body">
+						@if(isset($items))
+						@foreach($items as $item)
 						<div class="form-group">
 							<div class="col-sm-3 col-xs-3">
-								<img class="img-responsive" src="../img/shop/c3.jpg" />
+								<img class="img-responsive" src="../img/shop/{{ $item['product_image'] }}" />
 							</div>
 							<div class="col-sm-6 col-xs-6">
-								<div class="col-xs-12">Title Here</div>
-								<div class="col-xs-12"><small>Quantity:<span>1</span></small></div>
+								<div class="col-xs-12">{{ $item['product_name'] }}</div>
+								<div class="col-xs-12"><small>Số lượng :<span>{{ $item['product_quantity'] }}</span></small></div>
 							</div>
 							<div class="col-sm-3 col-xs-3 text-right">
-								<h5><span>$</span>25.00</h5>
+								<h5><span>$</span>{{ $item['product_quantity'] * $item['product_price'] }}</h5>
 							</div>
 						</div>
 						<div class="form-group"><hr /></div>
+						@endforeach
+						@endif
 						<div class="form-group">
-							<div class="col-sm-3 col-xs-3">
-								<img class="img-responsive" src="../img/shop/c2.jpg" />
+							<div class="col-xs-12">
+								<strong>Tổng tiền</strong>
+								<div class="pull-right"><span>$</span><span>{{ $total }}</span></div>
 							</div>
-							<div class="col-sm-6 col-xs-6">
-								<div class="col-xs-12">Title Here</div>
-								<div class="col-xs-12"><small>Quantity:<span>1</span></small></div>
-							</div>
-							<div class="col-sm-3 col-xs-3 text-right">
-								<h5><span>$</span>25.00</h5>
-							</div>
-						</div>
-						<div class="form-group"><hr /></div>
-						<div class="form-group">
-							<div class="col-sm-3 col-xs-3">
-								<img class="img-responsive" src="../img/shop/c1.jpg" />
-							</div>
-							<div class="col-sm-6 col-xs-6">
-								<div class="col-xs-12">Title Here</div>
-								<div class="col-xs-12"><small>Quantity:<span>2</span></small></div>
-							</div>
-							<div class="col-sm-3 col-xs-3 text-right">
-								<h5><span>$</span>50.00</h5>
+							<div class="col-xs-12">
+								<small>Phí giao hàng</small>
+								<div class="pull-right"><span>+ ${{ $shipping }}</span></div>
 							</div>
 						</div>
 						<div class="form-group"><hr /></div>
 						<div class="form-group">
 							<div class="col-xs-12">
-								<strong>Subtotal</strong>
-								<div class="pull-right"><span>$</span><span>100.00</span></div>
-							</div>
-							<div class="col-xs-12">
-								<small>Shipping</small>
-								<div class="pull-right"><span>-</span></div>
-							</div>
-						</div>
-						<div class="form-group"><hr /></div>
-						<div class="form-group">
-							<div class="col-xs-12">
-								<strong>Order Total</strong>
-								<div class="pull-right"><span>$</span><span>100.00</span></div>
+								<strong>Tổng tiền của hóa đơn</strong>
+								<div class="pull-right"><span>$</span><span>{{ $total + $shipping }}</span></div>
 							</div>
 						</div>
 					</div>
@@ -331,4 +160,45 @@
 		</div>
 	</div>
 </section>
+<!-- Modal -->
+<div class="modal fade" id="modalMessage" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<p>Cảm ơn bạn đã tin tưởng mua sản phẩm của chúng tôi</p>
+				<p>Chúc bạn một ngày tốt lành</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+@endsection
+@section('javascript')
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#form-checkout').on('submit', function(e){
+			e.preventDefault();
+			var form_data = $(this).serialize();
+			$.ajax({
+				url: "../ShopController/payBill",
+				method: "POST",
+				data: form_data,
+				success:function(data)
+				{
+					setTimeout(() => {
+					  $('#modalMessage').modal('show');
+					}, 50);
+				}
+			});
+		});
+	});
+</script>
 @endsection

@@ -23,6 +23,7 @@ class Appointent implements AppointentIplm
 		inner join doctor as d on e.id_doctor = d.id_doctor
 		inner join specialist as s on s.id = e.id_subject
 		inner join timeserving as t on t.id_timeserving = e.id_timeserving
+		where e.confirmed = '1'
 		";
 		$rs = mysqli_query($this->conn, $sql);
 		$result = array();
@@ -34,12 +35,13 @@ class Appointent implements AppointentIplm
 	}
 
 	public function insertData($first_name, $last_name, $email, $phone,
-						 $message, $id_doctor, $id_timeserving, $id_subject, $status = 0)
+						 $message, $id_doctor, $id_timeserving, $id_subject,
+						  $status = 0, $confirmed = 1, $confirm_code = 0)
 	{
-		$sql = "insert into examination_schedule(first_name, last_name, email, phone, message, id_doctor, id_timeserving, id_subject, status)
+		$sql = "insert into examination_schedule(first_name, last_name, email, phone, message, id_doctor, id_timeserving, id_subject, status, $confirmed, $confirm_code)
 			values('".$first_name."', '".$last_name."', '".$email."', '".$phone."',
 			 '".$message."', '".$id_doctor."', '".$id_timeserving."',
-			  '".$id_subject."', '".$status."')";
+			  '".$id_subject."', '".$status."', '".$confirmed."', '".$confirm_code."')";
 		mysqli_query($this->conn, $sql);
 	}
 
@@ -54,6 +56,22 @@ class Appointent implements AppointentIplm
 	public function deleteData($id_appointent)
 	{
 		mysqli_query($this->conn, "delete from examination_schedule where id = '".$id_appointent."'");
+	}
+
+	public function confirm($id, $token)
+	{
+		$sql = "select * from examination_schedule where id = ".$id;
+		$rs = mysqli_query($this->conn, $sql);
+
+		while($row = mysqli_fetch_array($rs))
+		{
+			$db_token = $row['confirm_code'];
+		}
+		if($token == $db_token)
+		{
+			mysqli_query($this->conn, "update examination_schedule set confirmed = '1', confirm_code = '0' where id = '".$id."'");
+			header('location: http://localhost/mvc/public/home/index');
+		}
 	}
 }
 

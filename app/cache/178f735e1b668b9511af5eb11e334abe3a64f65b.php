@@ -77,7 +77,9 @@
 						<h4>Subtotal<span>$ <?php echo e($total); ?></span></h4>
 					</div>
 					<div class="total-content">
-						<button class="btn-theme pull-right">Thanh toán</button>
+						<a href="../ShopController/checkout">
+							<button class="btn-theme pull-right">Thanh toán</button>
+						</a>
 						<p class="text-left">Checkout With Multiple Addresses</p>
 					</div>
 				</div>

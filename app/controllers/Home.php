@@ -1,6 +1,9 @@
 <?php
+
 use Jenssegers\Blade\Blade;
 use App\core\Controller;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 class Home extends Controller
 {
@@ -23,11 +26,15 @@ class Home extends Controller
 		//Get list specialist from Model Doctor
 		$specialist = $this->doctor->getListSpeacialist();
 
+		//Get list banner from model Doctor
+		$banners = $this->doctor->getBanner();
+
 		$blade = new Blade('../app/views/home', '../app/cache');
 
 		echo $blade->make('trangtru', [
-					'specialist' => $specialist
-					]);
+			'specialist' => $specialist,
+			'banners' => $banners
+		]);
 	}
 
 	//Function display form lienHe
@@ -83,9 +90,9 @@ class Home extends Controller
 				{
 					$output .= '<option value="'.$row["id_timeserving"].'">';
 					$output .= '<div class="item">
-									<div class="label">'. $row["weeksday"] .'</div>
-									<div class="value">'. $row["work_time"] .'</div>
-								</div>';
+					<div class="label">'. $row["weeksday"] .'</div>
+					<div class="value">'. $row["work_time"] .'</div>
+					</div>';
 					$output .= '</option>';
 				}
 			}
@@ -105,8 +112,39 @@ class Home extends Controller
 		$phone = $_POST['phone'];
 		$message = $_POST['message'];
 
+		$confirmCode = rand();
+
 		//Add appointent to database
-		$this->doctor->insertAppoinment($firstName, $lastName, $email,
-					 $phone, $message, $id_doctor, $id_calendar, $id_subject);
+		$last_id = $this->doctor->insertAppoinment($firstName, $lastName, $email,
+			$phone, $message, $id_doctor, $id_calendar, $id_subject, $confirmCode);
+
+		$messageEmail = "
+		Confirm Your Email
+		Click the link below to verify your account
+		http://localhost/mvc/public/AppointentController/cofirmEmail/$last_id/$confirmCode
+		";
+
+		$mail = new PHPMailer(true);
+
+		try {
+		    $mail->IsSMTP(); // enable SMTP
+			$mail->SMTPDebug = 1; // debugging: 1 = errors and messages, 2 = messages only
+			$mail->SMTPAuth = true; // authentication enabled
+			$mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for Gmail
+			$mail->Host = "smtp.gmail.com";
+			$mail->Port = 465; // or 587
+			$mail->IsHTML(true);
+			$mail->Username = "dotienduc1998@gmail.com";
+			$mail->Password = "Dotienduc1998";
+			$mail->SetFrom("dotienduc1998@gmail.com");
+			$mail->Subject = "Confirm Email";
+			$mail->Body = $messageEmail;
+			$mail->AddAddress($email);
+
+		    $mail->send();
+		    echo 'Message has been sent';
+		} catch (Exception $e) {
+		    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+		}
 	}
 }

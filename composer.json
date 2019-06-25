@@ -6,7 +6,8 @@
     "minimum-stability": "dev",
     "require": {
         "jenssegers/blade": "dev-master",
-        "fzaninotto/faker": "^1.9@dev"
+        "fzaninotto/faker": "^1.9@dev",
+        "phpmailer/phpmailer": "dev-master"
     },
     "config": {
         "optimize-autoloader": true

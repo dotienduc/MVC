@@ -65,22 +65,24 @@
     <!-- Wrapper For Slides -->
     <div class="carousel-inner" role="listbox">
         <!-- Third Slide -->
-        <div class="item active">
+        <?php $__currentLoopData = $banners; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <div class="item">
             <!-- Slide Background -->
-            <img src="../img/bg/3.jpg" alt="Slider Images"  class="slide-image"/>
+            <img src="../img/bg/<?php echo e($row['image']); ?>" alt="Slider Images"  class="slide-image"/>
             <div class="bs-slider-overlay"></div>
 
             <div class="slide-text slide_style_left">
-                <h1 data-animation="animated fadeInRight">The <span class="color-defult"> Medicative </span>Hospital</h1>
-                <p data-animation="animated fadeInLeft">Our team of over 7000 doctors join me in giving you the best <br> of modern healthcare to ensure you stay healthy, always.</p>
+                <h1 data-animation="animated fadeInRight"> <span class="color-defult"> <?php echo e($row['text1']); ?></span></h1>
+                <p data-animation="animated fadeInLeft"><?php echo e($row['text2']); ?>.</p>
                 <a href="#" target="_blank" class="btn btn-default" data-animation="animated fadeInLeft">Read more</a>
                 <a href="#" target="_blank"  class="btn btn-primary" data-animation="animated fadeInRight">Book Now</a>
             </div>
         </div>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         <!-- End of Slide -->
 
         <!-- Second Slide -->
-        <div class="item">            
+        <div class="item active">            
             <!-- Slide Background -->
             <img src="../img/bg/2.jpg" alt="Slider Images" class="slide-image"/>
             <div class="bs-slider-overlay"></div>
@@ -90,21 +92,6 @@
                 <p data-animation="animated lightSpeedIn">consectetur adipisicing elit. Eligendi vel ipsam deleniti dignissimos <br> corporis consequatur possimus eaque voluptates.</p>
                 <a href="#" target="_blank" class="btn btn-default" data-animation="animated fadeInUp">Read More</a>
                 <a href="#" target="_blank"  class="btn btn-primary" data-animation="animated fadeInDown">Donate Now</a>
-            </div>
-        </div>
-        <!-- End of Slide -->
-        
-        <!-- Third Slide -->
-        <div class="item">            
-            <!-- Slide Background -->
-            <img src="../img/bg/1.jpg" alt="Slider Images"  class="slide-image"/>
-            <div class="bs-slider-overlay"></div>
-            <!-- Slide Text Layer -->
-            <div class="slide-text slide_style_right">
-                <h1 data-animation="animated fadeInLeft">Life Wellness<span class="color-defult"> Programs</span></h1>
-                <p data-animation="animated fadeInRight">Stay in touch and in shape with periodic tips from our <br>in-house  experts on wellness, fitness and nutrition.</p>
-                <a href="#" target="_blank" class="btn btn-default" data-animation="animated fadeInLeft">Read More</a>
-                <a href="#" target="_blank" class="btn btn-primary" data-animation="animated fadeInRight">Donate Now</a>
             </div>
         </div>
         <!-- End of Slide -->

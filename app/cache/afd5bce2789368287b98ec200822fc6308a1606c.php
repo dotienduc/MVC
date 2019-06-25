@@ -57,24 +57,16 @@
                             </ul>
                         </li>
                     <li class="treeview">
-                        <a href="widgets.html">
-                            <i class="fa fa-user-circle-o"></i><span>Human Resources</span>
-                            <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="add-emp.html">Add Employee</a></li>
-                            <li><a href="emp-list.html">employee list</a></li>
-                            <li><a href="add-ns.html">Add Nurse</a></li>
-                            <li><a href="ns-list.html">Nurse list</a></li>
-                            <li><a href="add-ph.html">Add pharmacist</a></li>
-                            <li><a href="ph-list.html">pharmacist list</a></li>
-                            <li><a href="add-rep.html">Add Representative</a></li>
-                            <li><a href="rep-list.html">Representative list</a></li>
-                            
-                        </ul>
-                    </li>
+                            <a href="#">
+                                <i class="fa fa-check-square-o"></i><span>Quản lý đơn hàng</span>
+                                <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="../ShopController/listOrder">Đơn hàng</a></li></li>
+                            </ul>
+                        </li>
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-bed"></i><span>Quản lý tài khoản</span>
