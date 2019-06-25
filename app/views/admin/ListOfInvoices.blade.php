@@ -53,116 +53,90 @@
           <div class="row">
             <div class="panel-header">
               <div class="col-sm-8 col-xs-12">
-                </div>
-                 <div class="col-sm-4 col-xs-12">
-                  <div class="dataTables_length">
-                    <div class="input-group custom-search-form">
-                      <input type="search" class="form-control" placeholder="search..">
-                      <span class="input-group-btn">
-                        <button class="btn btn-primary" type="button">
-                          <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                      </span>
-                    </div><!-- /input-group -->
-                  </div>
+              </div>
+              <div class="col-sm-4 col-xs-12">
+                <div class="dataTables_length">
+                  <div class="input-group custom-search-form">
+                    <input type="search" class="form-control" placeholder="search..">
+                    <span class="input-group-btn">
+                      <button class="btn btn-primary" type="button">
+                        <span class="glyphicon glyphicon-search"></span>
+                      </button>
+                    </span>
+                  </div><!-- /input-group -->
                 </div>
               </div>
+            </div>
 
-            </div>
-            <div class="table-responsive">
-              <table class="table table-bordered table-hover">
-                <thead>
-                  <tr>
-                    <th>Tên khách hàng</th>
-                    <th>Địa chỉ</th>
-                    <th>Số điện thoại</th>
-                    <th>Mã hóa đơn</th>
-                    <th>Số lượng mua </th>
-                    <th>Tổng giá hóa đơn</th>
-                    <th>Gửi hàng</th>
-                    <th>Update</th>
-                  </tr>
-                </thead>
-                <tbody id="table-list">
-                  @foreach($listOrder as $order)
-                    <tr>
-                        <td>{{ $order['fname'] }} {{ $order['lname'] }}</td>
-                        <td>{{ $order['address'] }}</td>
-                        <td>{{ $order['phone'] }}</td>
-                        <td>{{ $order['id'] }}</td>
-                        <td>{{ $order['quantity'] }}</td>
-                        <td> $ {{ $order['total'] }}</td>
-                        <td><input type="checkbox" class="status" value="{{ $order['id'] }}" id="{{ $order['status'] }}" checked data-toggle="toggle"></td>
-                        <td><a href="#" class="view" id="{{ $order['id'] }}" ><button type="button" class="btn btn-success btn-sm">View</button></a></td>
-                    </tr>
-                  @endforeach
-                </tbody>
-              </table>
-            </div>
-            <div class="page-nation text-right">
-              <ul class="pagination pagination-large">
-                <li class="disabled"><span>«</span></li>
-                <li class="active"><span>1</span></li>
-                <li><a href="#">2</a></li>
-                <li class="disabled"><span>...</span></li><li>
-                  <li><a rel="next" href="#">Next</a></li>
-                </ul>
-              </div>
-
-            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th>Tên khách hàng</th>
+                  <th>Địa chỉ</th>
+                  <th>Số điện thoại</th>
+                  <th>Mã hóa đơn</th>
+                  <th>Số lượng mua </th>
+                  <th>Tổng giá hóa đơn</th>
+                  <th>Gửi hàng</th>
+                  <th>Update</th>
+                </tr>
+              </thead>
+              <tbody id="table-list">
+                @foreach($listOrder as $order)
+                <tr>
+                  <td>{{ $order['fname'] }} {{ $order['lname'] }}</td>
+                  <td>{{ $order['address'] }}</td>
+                  <td>{{ $order['phone'] }}</td>
+                  <td>{{ $order['id'] }}</td>
+                  <td>{{ $order['quantity'] }}</td>
+                  <td> $ {{ $order['total'] }}</td>
+                  <td><input type="checkbox" id="status{{ $order['id'] }}" value="{{ $order['status'] }}" class="switchButton" checked data-toggle="toggle">
+                    <input type="hidden" id="hidden_email" value="{{ $order['email'] }}">
+                    <input type="hidden" id="hidden_id{{$order['id']}}" value="{{ $order['id'] }}">
+                  </td>
+                  <td><a href="#" class="view" id="{{ $order['id'] }}" ><button type="button" class="btn btn-success btn-sm">View</button></a></td>
+                </tr>
+                @endforeach
+              </tbody>
+            </table>
           </div>
 
-        </div>
-
-      </div>
-    </section> <!-- /.content -->
-    <div id="ordine" class="modal fade" role="dialog">
-      <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content ">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">×</button>
-            <h4 class="modal-title">Update table</h4>
-          </div>
-          <div class="modal-body">
-            <div class="panel panel-bd lobidrag">
-              <div class="panel-heading">
-                <div class="btn-group"> 
-                  <a class="btn btn-primary" href="../BacsiController/managementDoctor"> <i class="fa fa-list"></i>Chi tiết hóa đơn</a>  
-                </div>
-              </div>
-              <div class="panel-body detailOrder">
-             </div>
-           </div>
-
-         </div>
-         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
 
     </div>
+
   </div>
-  <!-- Modal -->
-  <div class="modal fade" id="model-delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Cảnh báo</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+</section> <!-- /.content -->
+<div id="ordine" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content ">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">×</button>
+        <h4 class="modal-title">Update table</h4>
+      </div>
+      <div class="modal-body">
+        <div class="panel panel-bd lobidrag">
+          <div class="panel-heading">
+            <div class="btn-group"> 
+              <a class="btn btn-primary" href="../BacsiController/managementDoctor"> <i class="fa fa-list"></i>Chi tiết hóa đơn</a>  
+            </div>
+          </div>
+          <div class="panel-body detailOrder">
+          </div>
         </div>
-        <div class="modal-body">
-          Bạn có chắc chắn không ? 
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-danger btn-del" id="">Xóa</button>
-        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
+
   </div>
+</div>
 </div> <!-- /.content-wrapper -->
 @endsection
 @section('javascript')
@@ -174,33 +148,40 @@
 
     function switchButton()
     {
-      var status = $('.status').attr('id');
-      if(status == 0)
-      {
-        $('.status').prop('checked', false).change()
-      }else {
-        $('.status').prop('checked', true).change()
-      }
-    }
-
-    $('.status').change(function() {
-      var status = $(this).prop('checked');
-      var id_bill = $(this).val();
-      if(status == true){
-        status = 1;
-      }else {
-        status = 0;
-      }
-      $.ajax({
-        url: "../ShopController/shipping",
-        method: "POST",
-        data: {status: status, id_bill: id_bill},
-        success:function(data)
+      var status = document.querySelectorAll('.switchButton');
+      status.forEach((item) => {
+        if($(item).val() == 0)
         {
-
+          $(item).prop('checked', false).change();
+        }else {
+          $(item).prop('disabled', true).change();
         }
       });
-    })
+      
+    }
+
+    $('.switchButton').each(function(){
+      $(this).on('change', function(){
+        var status = $(this).prop('checked');
+        var id_bill = $(this).attr('id').slice(6, 7);
+        if(status == true){
+          status = 1;
+        }else {
+          status = 0;
+        }
+        $.ajax({
+          url: "../ShopController/shipping",
+          method: "POST",
+          data: {status: status, id_bill: id_bill},
+          success:function(data)
+          {
+            setTimeout(() => {
+              location.reload();
+            }, 200);
+          }
+        });
+      });
+    });
 
     $('.view').on('click', function(e){
       e.preventDefault();

@@ -2,20 +2,21 @@
 
 use Jenssegers\Blade\Blade;
 use App\core\Controller;
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
+use App\SendEmail;
 
 class Home extends Controller
 {
 	private $user;
 	private $contact;
 	private $doctor;
+	private $sendEmail;
 
 	public function __construct()
 	{
 		$this->user = $this->model('User');
 		$this->contact = $this->model('Question');
 		$this->doctor = $this->model('Doctor');
+		$this->sendEmail = new SendEmail;
 	}
 
 
@@ -119,32 +120,11 @@ class Home extends Controller
 			$phone, $message, $id_doctor, $id_calendar, $id_subject, $confirmCode);
 
 		$messageEmail = "
-		Confirm Your Email
-		Click the link below to verify your account
-		http://localhost/mvc/public/AppointentController/cofirmEmail/$last_id/$confirmCode
+		<h3>Confirm Your Email</h3>
+		<p>Click the link below to verify your account</p><br>
+		<button type='button' style='padding: 5px 10px; color:black; text-decoration: none;'><a href='http://localhost/mvc/public/AppointentController/cofirmEmail/$last_id/$confirmCode'>Xác nhận lịch khám tại đây</a></button>
 		";
 
-		$mail = new PHPMailer(true);
-
-		try {
-		    $mail->IsSMTP(); // enable SMTP
-			$mail->SMTPDebug = 1; // debugging: 1 = errors and messages, 2 = messages only
-			$mail->SMTPAuth = true; // authentication enabled
-			$mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for Gmail
-			$mail->Host = "smtp.gmail.com";
-			$mail->Port = 465; // or 587
-			$mail->IsHTML(true);
-			$mail->Username = "dotienduc1998@gmail.com";
-			$mail->Password = "Dotienduc1998";
-			$mail->SetFrom("dotienduc1998@gmail.com");
-			$mail->Subject = "Confirm Email";
-			$mail->Body = $messageEmail;
-			$mail->AddAddress($email);
-
-		    $mail->send();
-		    echo 'Message has been sent';
-		} catch (Exception $e) {
-		    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-		}
+		$this->sendEmail->send($messageEmail, $email);
 	}
 }

@@ -53,8 +53,8 @@ class Product implements ProductIplm
 		$id_customer = mysqli_insert_id($this->conn);
 
 		$sql2 = " insert into 
-				bills(id_customer, date_order, total, note)
-				values('".$id_customer."', '".date('Y-m-d')."', '".$total."', '".$note."')
+				bills(id_customer, date_order, total, note, status)
+				values('".$id_customer."', '".date('Y-m-d')."', '".$total."', '".$note."', '0')
 				";
 
 		mysqli_query($this->conn, $sql2);
@@ -73,11 +73,12 @@ class Product implements ProductIplm
 		{
 			unset($_SESSION['shopping_cart']);
 		}
+		return $id_bill;
 	}
 
 	public function getListOrder()
 	{
-		$sql = "select c.fname, c.lname, c.address, c.phone, b.id, b.total, b.status, sum(bd.quantity)as quantity from bills b inner join customers c on b.id_customer = c.id inner join bill_detail bd on b.id = bd.id_bill group by b.id";
+		$sql = "select c.fname, c.lname, c.address, c.email, c.phone, b.id, b.total, b.status, sum(bd.quantity)as quantity from bills b inner join customers c on b.id_customer = c.id inner join bill_detail bd on b.id = bd.id_bill group by b.id";
 
 		$rs = mysqli_query($this->conn, $sql);
 

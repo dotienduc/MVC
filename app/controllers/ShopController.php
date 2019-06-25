@@ -1,14 +1,17 @@
 <?php
 use Jenssegers\Blade\Blade;
 use App\core\Controller;
+use App\SendEmail;
 
 class ShopController extends Controller
 {
 	private $product;
+	private $sendEmail;
 
 	public function __construct()
 	{
 		$this->product = $this->model('Product');
+		$this->sendEmail = new SendEmail;
 	}
 
 	//Function display list product
@@ -210,6 +213,68 @@ class ShopController extends Controller
 
 		//Action pay order from model Product
 		$rs = $this->product->actionPay($first_name, $last_name, $phone_number, $gender, $address, $email_address, $note, $hidden_total);
+
+		//
+		$detailOrder = $this->product->getDetailOrder($rs);
+
+		$order = '';
+		$customerDetail = '';
+		$order_detail = '';
+		$total = 0;
+
+		foreach($detailOrder as $row)
+		{
+			$customerDetail = '  
+			<label>Tên khách hàng : '.$row["fname"].''.$row["lname"].'</label>  
+			<p>Địa chỉ : '.$row["address"].'</p>  
+			<p>Số điện thoại : '.$row["phone"].'</p>  
+			<p>Email : '.$row["email"].'</p> 
+			<p>Ghi chú : '.$row["note"].'</p>   
+			';
+
+			$order_detail .= "  
+			<tr>  
+			<td>".$row["product_name"]."</td>  
+			<td>".$row["quantity"]."</td>  
+			<td>".$row["price"]."</td>  
+			<td>".number_format($row["quantity"] * $row["price"], 2)."</td>  
+			</tr>  
+			";  
+			$total = $total + ($row["quantity"] * $row["price"]);
+		}
+		$order = '
+		<div class="table-responsive">  
+			<table class="table">  
+				<tr>  
+					<td><label>Thông tin khách hàng</label></td>  
+				</tr>  
+				<tr>  
+					<td>'.$customerDetail.'</td>  
+				</tr>  
+				<tr>  
+					<td><label>Thông tin hóa đơn</label></td>  
+				</tr>  
+				<tr>  
+					<td>  
+						<table class="table table-bordered">  
+						<tr>  
+							<th width="50%">Tên sản phẩm</th>  
+							<th width="15%">Số lượng</th>  
+							<th width="15%">Giá</th>  
+							<th width="20%">Tổng</th>  
+						</tr>  
+						'.$order_detail.'  
+						<tr>  
+							<td colspan="3" align="right"><label>Tổng hóa đơn</label></td>  
+							<td>'.number_format($total, 2).'</td>  
+						</tr>  
+						</table>  
+					</td>  
+				</tr>  
+			</table>  
+		</div>
+		';
+		$this->sendEmail->send($order, $email_address);
 	}
 
 	//Function display list order 
@@ -217,10 +282,6 @@ class ShopController extends Controller
 	{
 		//Get list order from model Product
 		$listOrder = $this->product->getListOrder();
-
-		// echo "<pre>";
-		// print_r($listOrder);
-		// die();
 
 		$blade = new Blade('../app/views/admin', '../app/cache');
 		echo $blade->make('ListOfInvoices', ['listOrder' => $listOrder]);
@@ -232,9 +293,6 @@ class ShopController extends Controller
 		$id = $_POST['id_bill'];
 		$detailOrder = $this->product->getDetailOrder($id);
 
-		// echo "<pre>";
-		// print_r($detailOrder);
-		// die();
 		$order = '';
 		$customerDetail = '';
 		$order_detail = '';
