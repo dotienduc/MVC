@@ -10,9 +10,9 @@
  <td class="{{ $account['role'] }}">Người quản trị</td>
  @endif
  @if($account['status'] == 0)
- <td><span class="label-default label label-danger">Không hoạt động</span></td>
+ <td class="{{ $account['status'] }}"><span class="label-default label label-danger">Không hoạt động</span></td>
  @else
- <td><span class="label-success label label-default">Hoạt động</span></td>
+ <td class="{{ $account['status'] }}"><span class="label-success label label-default">Hoạt động</span></td>
  @endif
  <td>
  <button type="button" class="btn btn-info btn-xs edit" id="{{ $account['id'] }}"><i class="fa fa-pencil"></i>

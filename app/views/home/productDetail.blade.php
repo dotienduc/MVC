@@ -56,11 +56,18 @@
 								@endif
 							</div>
 							<p>{{ $product['description'] }}</p>
-							<input type="hidden" name="hidden_name" id="name{{ $product['name'] }}" value="{{ $product['name'] }}">
-							<input type="hidden" name="hidden_name" id="name{{ $product['name'] }}" value="{{ $product['name'] }}">
-							<input type="hidden" name="hidden_name" id="name{{ $product['name'] }}" value="{{ $product['name'] }}">
+							<input type="hidden" name="hidden_image" id="image{{ $product['id'] }}" value="{{ $product['image'] }}">
+							<input type="hidden" name="hidden_name" id="name{{ $product['id'] }}" value="{{ $product['name'] }}">
+							@if($product['promotion_price'] == 0)
+							<input type="hidden" name="hidden_UnitPrice" id="unit_price{{ $product['id'] }}" value="{{ $product['unit_price'] }}">
+							<input type="hidden" name="hidden_PromotionPrice" id="promotion_price{{ $product['id'] }}" value="0">
+							@else
+							<input type="hidden" name="hidden_PromotionPrice" id="promotion_price{{ $product['id'] }}" value="{{ $product['promotion_price'] }}">
+							<input type="hidden" name="hidden_UnitPrice" id="unit_price{{ $product['id'] }}" value="0">
+							@endif
+							<input type="hidden" name="hidden_quantity" id="quantity{{ $product['id'] }}" value="1">
 							<a href="#" class="btn btn-simple add_cart" id="{{ $product['id'] }}">Add to Cart</a>
-							<a href="#" class="btn btn-simple">Buy Now</a>
+							<a href="../../ShopController/checkout" class="btn btn-simple">Buy Now</a>
 						</div>
 					</div>
 				</div>
@@ -103,7 +110,60 @@
 
 	<!-- Main Custom JS -->
 	<script type="text/javascript" src="../../js/script.js"></script>
+	
+	<script type="text/javascript">
+		$(document).ready(function(){
+			load_cart();
+			function load_cart()
+			{
+				$.ajax({
+					url: "../../ShopController/getItemInCart",
+					method: "POST",
+					dataType: "json",
+					success:function(data)
+					{
+						$('#table-order').html(data.order_table);
+						$('.badge').text(data.cart_item);
+					}
+				});
+			}
 
+			$('.add_cart').on('click', function(e){
+				e.preventDefault();
+				var product_id =  $(this).attr('id');
+				var product_image = $('#image'+product_id).val();
+				var product_name = $('#name'+product_id).val();
+				var product_quantity = $('#quantity'+product_id).val();
+				var promotion_price = $('#promotion_price'+product_id).val();
+				var product_price = 0;
+				if(promotion_price == 0)
+				{
+					product_price = $('#unit_price'+product_id).val();
+				}else {
+					product_price = promotion_price;
+				}
+				var action = "add";
+				$.ajax({
+					url: "../../ShopController/action",
+					method: "POST",
+					data:{
+						product_name: product_name,
+						product_id: product_id,
+						product_quantity: product_quantity,
+						product_price: product_price,
+						action: action,
+						product_image: product_image
+					},
+					dataType: "json",
+					success: function(data)
+					{
+						$('#table-order').html(data.order_table);
+						$('.badge').text(data.cart_item);
+					}
+				});
+			});
+		});
+	</script>
 
 </body>
 

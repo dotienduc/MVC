@@ -50,25 +50,6 @@
         <div class="panel-heading">        
         </div>
         <div class="panel-body">
-          <div class="row">
-            <div class="panel-header">
-              <div class="col-sm-8 col-xs-12">
-              </div>
-              <div class="col-sm-4 col-xs-12">
-                <div class="dataTables_length">
-                  <div class="input-group custom-search-form">
-                    <input type="search" class="form-control" placeholder="search..">
-                    <span class="input-group-btn">
-                      <button class="btn btn-primary" type="button">
-                        <span class="glyphicon glyphicon-search"></span>
-                      </button>
-                    </span>
-                  </div><!-- /input-group -->
-                </div>
-              </div>
-            </div>
-
-          </div>
           <div class="table-responsive">
             <table class="table table-bordered table-hover">
               <thead>

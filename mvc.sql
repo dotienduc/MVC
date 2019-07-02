@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 25, 2019 at 11:36 AM
+-- Generation Time: Jul 02, 2019 at 03:09 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.1.27
 
@@ -68,7 +68,7 @@ CREATE TABLE `bills` (
 --
 
 INSERT INTO `bills` (`id`, `id_customer`, `date_order`, `total`, `note`, `created_at`, `updated_at`, `status`) VALUES
-(2, 2, '2019-06-21', 205, 'sdasdasdsad', '2019-06-25 04:34:14', '0000-00-00 00:00:00', 1);
+(4, 4, '2019-06-28', 155, 'sdasdasdsad', '2019-06-29 09:02:25', '0000-00-00 00:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -91,8 +91,7 @@ CREATE TABLE `bill_detail` (
 --
 
 INSERT INTO `bill_detail` (`id`, `id_bill`, `id_product`, `quantity`, `price`, `created_at`, `updated_at`) VALUES
-(2, 2, 6, 1, 150, '2019-06-21 03:26:28', '0000-00-00 00:00:00'),
-(3, 2, 5, 1, 50, '2019-06-21 03:26:28', '0000-00-00 00:00:00');
+(5, 4, 6, 1, 150, '2019-06-28 08:45:17', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -141,7 +140,7 @@ CREATE TABLE `calendar` (
 INSERT INTO `calendar` (`id`, `id_doctor`, `id_timeserving`) VALUES
 (8, 1, 4),
 (9, 7, 3),
-(10, 1, 2);
+(10, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -172,7 +171,9 @@ INSERT INTO `comments` (`id`, `parent_commnet_id`, `comment`, `comment_sender_na
 (44, 0, 'Bài viết rất hay', 'Nguyen Van A', 22, '2019-06-14 17:53:45'),
 (45, 44, 'Hay con cặc', 'Nguyen Van B', 22, '2019-06-14 17:53:54'),
 (46, 0, 'Xin chào', 'Nguyen Van A', 21, '2019-06-17 08:52:32'),
-(47, 0, 'ok', 'Nguyen Van A', 22, '2019-06-20 17:33:49');
+(47, 0, 'ok', 'Nguyen Van A', 22, '2019-06-20 17:33:49'),
+(48, 0, 'con chó', 'Nguyen Van A', 20, '2019-06-28 16:03:09'),
+(49, 0, 'OK', 'Nguyen Van B', 20, '2019-07-01 09:25:20');
 
 -- --------------------------------------------------------
 
@@ -198,7 +199,8 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`id`, `fname`, `lname`, `address`, `email`, `gender`, `phone`, `note`, `created_at`, `updated_at`) VALUES
-(2, 'Kudo', 'Shinichi', 'Kí túc xá Đại học Công Nghiệp Hà Nội', 'Kudo@gmail.com', 'nam', '0936036716', 'sdasdasdsad', '2019-06-25 02:47:04', '0000-00-00 00:00:00');
+(4, 'asda', 'dasdas', 'Kí túc xá Đại học công nghiệp Hà Nội khu A', 'mayhajnhj1998@gmail.com', 'nam', '4444444444', 'sdasdasdsad', '2019-06-28 08:45:17', '0000-00-00 00:00:00'),
+(5, 'asda', 'dasdas', 'Kí túc xá Đại học công nghiệp Hà Nội khu A', 'mayhajnhj1998@gmail.com', 'nữ', '4444444444', 'sasaq', '2019-06-28 08:46:56', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -257,8 +259,7 @@ CREATE TABLE `examination_schedule` (
 --
 
 INSERT INTO `examination_schedule` (`id`, `first_name`, `last_name`, `email`, `phone`, `message`, `id_doctor`, `id_timeserving`, `id_subject`, `status`, `confirmed`, `confirm_code`) VALUES
-(20, 'asda', 'dasdas', 'mayhajnhj1998@gmail.com', '4444444444', 'sasa', 1, 2, 1, 0, 1, 0),
-(21, 'asda', 'dasdas', 'mayhajnhj1998@gmail.com', '4444444444', '1212', 1, 2, 1, 0, 1, 0);
+(28, 'asda', 'dasdas', 'mayhajnhj1998@gmail.com', '4444444444', 'sfsdsfs', 1, 2, 1, 0, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -308,8 +309,8 @@ CREATE TABLE `question` (
 --
 
 INSERT INTO `question` (`id`, `name`, `email`, `subject`, `message`, `status`) VALUES
-(1, 'duckudo', 'mayhajnhj1998@gmail.com', 'Tu van sdad', 'adada', 0),
-(2, 'AC', 'mayhajnhj456@yahoo.com.vn', 'sasas', 'sdada', 0);
+(6, 'asda dasdas', 'mayhajnhj1998@gmail.com', 'Tu van ', '556', 1),
+(7, 'cccc', 'mayhajnhj1998@gmail.com', 'dasda', 'eretdada', 0);
 
 -- --------------------------------------------------------
 
@@ -380,9 +381,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `phone`, `password`, `address`, `role`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'mayhajnhj1998@gmail.com', '0123456789', '99999', 'Ha noi', 1, 1, '2019-06-18 03:53:09', '0000-00-00 00:00:00'),
-(2, 'Alibaba', 'mayhajnhj1998@gmail.com', '232423', '0123456789', 'Kí túc xá Đại học công nghiệp Hà Nội khu A', 1, 0, '2019-06-18 07:34:56', '0000-00-00 00:00:00'),
-(3, 'Kudo', 'mayhajnhj1998@gmail.com', '232423', '123456789', 'Kí túc xá Đại học công nghiệp Hà Nội khu A', 0, 0, '2019-06-18 07:35:02', '0000-00-00 00:00:00');
+(1, 'admin', 'mayhajnhj1998@gmail.com', '0123456789', '99999', 'Ha noi', 1, 1, '2019-06-29 08:29:57', '0000-00-00 00:00:00'),
+(2, 'Alibaba', 'mayhajnhj1998@gmail.com', '232423', '0123456789', 'Kí túc xá Đại học công nghiệp Hà Nội khu A', 1, 1, '2019-06-29 02:26:05', '0000-00-00 00:00:00'),
+(5, 'Doctor', 'sas@gmail.com', '4444444444', '99999', 'Kí túc xá Đại học công nghiệp Hà Nội khu A', 0, 1, '2019-06-29 08:30:46', '0000-00-00 00:00:00');
 
 --
 -- Indexes for dumped tables
@@ -486,13 +487,13 @@ ALTER TABLE `banner`
 -- AUTO_INCREMENT for table `bills`
 --
 ALTER TABLE `bills`
-  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `bill_detail`
 --
 ALTER TABLE `bill_detail`
-  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `blog`
@@ -510,13 +511,13 @@ ALTER TABLE `calendar`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `doctor`
@@ -528,7 +529,7 @@ ALTER TABLE `doctor`
 -- AUTO_INCREMENT for table `examination_schedule`
 --
 ALTER TABLE `examination_schedule`
-  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -540,7 +541,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `question`
 --
 ALTER TABLE `question`
-  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `specialist`
@@ -558,7 +559,7 @@ ALTER TABLE `timeserving`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

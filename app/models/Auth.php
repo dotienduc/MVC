@@ -1,16 +1,14 @@
 <?php
-require_once __DIR__ . '../../../vendor/autoload.php';
 
-use App\connect\Connection;
-use App\iplm\AuthIplm;
+use App\core\Registry;
 
-class Auth implements AuthIplm
+class Auth 
 {
 	private $conn;
 
 	public function __construct()
 	{
-		$this->conn = Connection::connectDb();
+		$this->conn = Registry::getInstance()->database;
 	}
 
 	public function checkAuth($username, $password)

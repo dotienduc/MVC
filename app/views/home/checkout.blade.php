@@ -193,6 +193,7 @@
 				data: form_data,
 				success:function(data)
 				{
+					$('#form-checkout')[0].reset();
 					setTimeout(() => {
 					  $('#modalMessage').modal('show');
 					}, 50);

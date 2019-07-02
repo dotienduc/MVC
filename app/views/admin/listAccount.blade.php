@@ -53,34 +53,6 @@
           </div>        
         </div>
         <div class="panel-body">
-          <div class="row">
-            <div class="panel-header">
-              <div class="col-sm-8 col-xs-12">
-                <div class="dataTables_length">
-                  <label>Display 
-                    <select name="example_length">
-                      <option value="10">10</option>
-                      <option value="25">25</option>
-                      <option value="50">50</option>
-                      <option value="100">100</option>
-                    </select> records per page</label>
-                  </div>
-                </div>
-                <div class="col-sm-4 col-xs-12">
-                  <div class="dataTables_length">
-                    <div class="input-group custom-search-form">
-                      <input type="search" class="form-control" placeholder="search..">
-                      <span class="input-group-btn">
-                        <button class="btn btn-primary" type="button">
-                          <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                      </span>
-                    </div><!-- /input-group -->
-                  </div>
-                </div>
-              </div>
-
-            </div>
             <div class="table-responsive">
               <table class="table table-bordered table-hover">
                 <thead>
@@ -98,15 +70,6 @@
                 </tbody>
               </table>
             </div>
-            <div class="page-nation text-right">
-              <ul class="pagination pagination-large">
-                <li class="disabled"><span>«</span></li>
-                <li class="active"><span>1</span></li>
-                <li><a href="#">2</a></li>
-                <li class="disabled"><span>...</span></li><li>
-                  <li><a rel="next" href="#">Next</a></li>
-                </ul>
-              </div>
 
             </div>
           </div>
@@ -172,7 +135,6 @@
                     </select>
                   </div>
                   <div class="reset button">
-                   <a href="#" class="btn btn-primary">Reset</a>
                    <input type="hidden" name="id_account" id="id_account" >
                    <input type="hidden" name="status" value="1">
                    <input type="hidden" name="action" id="action" value="add">
@@ -279,6 +241,7 @@
       $('#address').val(account.children[3].innerText);
       $('#phone').val(account.children[2].innerText);
       $('#role').val(account.children[4].classList);
+      $('#status-value').val(account.children[5].classList);
       $('#id_account').val(id_account);
       $('#action').val('edit');
       $('#ordine').modal('show'); 

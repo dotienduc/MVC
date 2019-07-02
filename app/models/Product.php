@@ -1,18 +1,31 @@
 <?php 
 
-require_once __DIR__ . '../../../vendor/fzaninotto/faker/src/autoload.php';
-require_once __DIR__ . '../../../vendor/autoload.php';
+use App\core\AppException;
+use App\core\Registry;
 
-use App\connect\Connection;
-use App\iplm\ProductIplm;
-
-class Product implements ProductIplm
+class Product
 {
 	private $conn;
 
 	public function __construct()
 	{
-		$this->conn = Connection::connectDb();
+		$this->conn = Registry::getInstance()->database;
+	}
+
+	public function getSaleProducts()
+	{
+		$sql = "select * from products where promotion_price != '0'
+				 order by id desc limit 5";
+
+		$rs = mysqli_query($this->conn, $sql);
+
+		$result = array();
+
+		while($row = mysqli_fetch_array($rs))
+		{
+			$result[] = $row;
+		}
+		return $result;
 	}
 
 	public function getProducts()
@@ -35,6 +48,11 @@ class Product implements ProductIplm
 		$sql = "select * from products where id = ".$id_product;
 
 		$rs = mysqli_query($this->conn, $sql);
+
+		if(!$rs)
+		{
+			throw new AppException("Invalid ID");
+		}
 
 		$result = mysqli_fetch_array($rs);
 		return $result;
@@ -82,6 +100,7 @@ class Product implements ProductIplm
 
 		$rs = mysqli_query($this->conn, $sql);
 
+
 		$result = array();
 
 		while($row = mysqli_fetch_array($rs))
@@ -99,7 +118,7 @@ class Product implements ProductIplm
 			 inner join customers c on b.id_customer = c.id
 			 inner join bill_detail bd on b.id = bd.id_bill
 			 inner join products p on p.id = bd.id_product
-			 where b.id='2' ";
+			 where b.id='".$id_bill."' ";
 		$rs = mysqli_query($this->conn, $sql);
 
 		$result = array();

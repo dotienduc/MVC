@@ -1,5 +1,5 @@
 <?php
-use Jenssegers\Blade\Blade;
+
 use App\core\Controller;
 use App\SendEmail;
 
@@ -20,8 +20,13 @@ class ShopController extends Controller
 		//Get list product from model Product
 		$products = $this->product->getProducts();
 
-		$blade = new Blade('../app/views/home', '../app/cache');
-		echo $blade->make('shop', ['products' => $products]);
+		//Get list sale product from model Product
+		$saleProducts = $this->product->getSaleProducts();
+
+		$this->render('home.shop', ['products' => $products,
+						 			'saleProducts' => $saleProducts
+								]);
+
 	}
 
 	//Function display shopping cart
@@ -60,8 +65,7 @@ class ShopController extends Controller
 			$total = $total + ($value['product_quantity'] * $value['product_price']);
 		}
 
-		$blade = new Blade('../app/views/home', '../app/cache');
-		echo $blade->make('shoppingCart', ['items' => $items, 'total' => $total]);
+		$this->render('home.shoppingCart', ['items' => $items, 'total' => $total]);
 	}
 
 	//Function display form checkout
@@ -80,8 +84,8 @@ class ShopController extends Controller
 			$total = $total + ($value['product_quantity'] * $value['product_price']);
 		}
 
-		$blade = new Blade('../app/views/home', '../app/cache');
-		echo $blade->make('checkout', ['items' => $items, 'total' => $total, 'shipping' => $shipping]);
+		$this->render('home.checkout', ['items' => $items, 'total' => $total,
+										 'shipping' => $shipping]);
 	}
 
 	//Function display info detail product
@@ -90,8 +94,7 @@ class ShopController extends Controller
 		//Get info product from Model Product
 		$product = $this->product->getDetailProduct($id);
 
-		$blade = new Blade('../app/views/home', '../app/cache');
-		echo $blade->make('productDetail', ['id' => $id, 'product' => $product]);
+		$this->render('home.productDetail', ['id' => $id, 'product' => $product]);
 	}
 
 	//Function Auto load data cart
@@ -282,9 +285,8 @@ class ShopController extends Controller
 	{
 		//Get list order from model Product
 		$listOrder = $this->product->getListOrder();
-
-		$blade = new Blade('../app/views/admin', '../app/cache');
-		echo $blade->make('ListOfInvoices', ['listOrder' => $listOrder]);
+		
+		$this->render('admin.ListOfInvoices', ['listOrder' => $listOrder]);
 	}
 
 	//Function display detail Order

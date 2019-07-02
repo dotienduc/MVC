@@ -10,6 +10,10 @@ class AppointentController extends Controller
 
 	public function __construct()
 	{
+		if(isset($_SESSION['info']))
+		{
+			$this->middleware($_SESSION['info']['role']);
+		}
 		$this->doctor = $this->model('Doctor');
 		$this->appointent = $this->model('Appointent');
 	}
@@ -23,9 +27,8 @@ class AppointentController extends Controller
 		//Get list doctor from Model Doctor
 		$doctors = $this->doctor->getListDoctor();
 
-		$blade = new Blade('../app/views/admin', '../app/cache');
-
-		echo $blade->make('listOfAppointments', ['specialist' => $specialist, 'doctors' => $doctors]);
+		$this->render('admin.listOfAppointments', ['specialist' => $specialist,
+					 'doctors' => $doctors]);
 	}
 
 	//function display formAppointent
@@ -34,9 +37,7 @@ class AppointentController extends Controller
 		//Get list specialist from Model Doctor
 		$specialist = $this->doctor->getListSpeacialist();
 
-		$blade = new Blade('../app/views/admin', '../app/cache');
-
-		echo $blade->make('medicalExaminationForm', ['specialist' => $specialist]);
+		$this->render('admin.medicalExaminationForm', ['specialist' => $specialist]);
 	}
 
 	//function fetch data list appointent from model Appointent
@@ -45,9 +46,7 @@ class AppointentController extends Controller
 		//Get list appointent from model Appointent
 		$appointents = $this->appointent->getListAppointent();
 
-		$blade = new Blade('../app/views/admin/dataAjax', '../app/cache');
-
-		echo $blade->make('TableAppointent', ['appointents' => $appointents]);
+		$this->render('admin.dataAjax.TableAppointent', ['appointents' => $appointents]);
 	}
 
 	//Function insert appointent 

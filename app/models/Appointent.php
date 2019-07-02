@@ -1,17 +1,14 @@
 <?php 
 
-require_once __DIR__ . '../../../vendor/autoload.php';
+use App\core\Registry;
 
-use App\connect\Connection;
-use App\iplm\AppointentIplm;
-
-class Appointent implements AppointentIplm
+class Appointent 
 {
 	private $conn;
 
 	public function __construct()
 	{
-		$this->conn = Connection::connectDb();
+		$this->conn = Registry::getInstance()->database;
 	}
 
 	public function getListAppointent()

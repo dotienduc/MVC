@@ -72,7 +72,6 @@
 							</div>
 
 							<div class="col-sm-12 reset-button">
-								<a href="#" class="btn btn-warning">Reset</a>
 								<button type="submit" class="btn btn-success">Lưu</button>
 							</div>
 						</form>

@@ -1,17 +1,15 @@
 <?php
-require_once __DIR__ . '../../../vendor/fzaninotto/faker/src/autoload.php';
-require_once __DIR__ . '../../../vendor/autoload.php';
 
-use App\connect\Connection;
-use App\iplm\DoctorIplm;
+use App\core\AppException;
+use App\core\Registry;
 
-class Doctor implements DoctorIplm
+class Doctor 
 {
 	private $conn;
 
 	public function __construct()
 	{
-		$this->conn = Connection::connectDb();
+		$this->conn = Registry::getInstance()->database;
 	}
 
 	// CURD Doctor
@@ -52,9 +50,9 @@ class Doctor implements DoctorIplm
 	public function getCalendar($id_doctor)
 	{
 		$sql = "select * from calendar
-				inner join timeserving on timeserving.id_timeserving = calendar.id_timeserving
-				where id_doctor = 
-				" . $id_doctor;
+		inner join timeserving on timeserving.id_timeserving = calendar.id_timeserving
+		where id_doctor = 
+		" . $id_doctor;
 		$rs = mysqli_query($this->conn, $sql);
 
 		$calendars = array();
@@ -70,6 +68,10 @@ class Doctor implements DoctorIplm
 	{
 		$sql = "select * from doctor inner join specialist on doctor.id_specialist = specialist.id  where id_doctor = ".$id_doctor;
 		$rs = mysqli_query($this->conn, $sql);
+		if(!$rs)
+		{
+			throw new AppException("Invalid ID");
+		}
 		$doctor = mysqli_fetch_array($rs);
 		return $doctor;
 	}
@@ -101,18 +103,18 @@ class Doctor implements DoctorIplm
 	}
 
 	public function insertAppoinment(
-					$fName, $lName, $email, $phone,
-					$message, $id_doctor, $id_timeserving, $id_subject,
-					$confirmCode, $status = 0, $confirmed = 0
-					)
+		$fName, $lName, $email, $phone,
+		$message, $id_doctor, $id_timeserving, $id_subject,
+		$confirmCode, $status = 0, $confirmed = 0
+	)
 	{
 		$sql = "insert into 
-			examination_schedule(first_name, last_name, email, 
-							phone, message, id_doctor, id_timeserving,
-							 id_subject, status, confirmed, confirm_code)
-			values('".$fName."', '".$lName."', '".$email."', '".$phone."', '".$message."',
-					 '".$id_doctor."', '".$id_timeserving."' , '".$id_subject."',
-					  '".$status."', '".$confirmed."', '".$confirmCode."')";
+		examination_schedule(first_name, last_name, email, 
+		phone, message, id_doctor, id_timeserving,
+		id_subject, status, confirmed, confirm_code)
+		values('".$fName."', '".$lName."', '".$email."', '".$phone."', '".$message."',
+		'".$id_doctor."', '".$id_timeserving."' , '".$id_subject."',
+		'".$status."', '".$confirmed."', '".$confirmCode."')";
 		mysqli_query($this->conn, $sql);
 
 		$last_id = mysqli_insert_id($this->conn);

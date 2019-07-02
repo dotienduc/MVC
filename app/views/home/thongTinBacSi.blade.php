@@ -153,35 +153,6 @@
                                     <div class="skillbar-4"></div>  
                                 </div>
                             </div>
-                            <div class="margin-bottom-30">
-                                <h4>EDUCATION & MEDICAL TRAINING</h4>
-                                <div class="border-style-2 margin-bottom-30"></div>
-                                <ul class="list-style margin-left-10">
-                                    <li><i class="fa fa-angle-right margin-right-10"></i> <strong>Australasian College of Dermatologists</strong></li>
-                                    <li><i class="fa fa-angle-right margin-right-10"></i> Australasian College of Podiatric Surgeons</li>
-                                    <li><i class="fa fa-angle-right margin-right-10"></i> Australasian College for Emergency Medicine</li>
-                                </ul>
-                            </div>
-                            <div class="margin-bottom-30">
-                                <h4>Training</h4>
-                                <div class="border-style-2 margin-bottom-30"></div>
-                                <ul class="list-style margin-left-10">
-                                    <li><i class="fa fa-angle-right margin-right-10"></i> Royal Australasian College of Medical Administrators</li>
-                                    <li><i class="fa fa-angle-right margin-right-10"></i><strong>Royal Australasian College of Physicians</strong> </li>
-                                    <li><i class="fa fa-angle-right margin-right-10"></i> Royal College of Pathologists of Australasia</li>
-                                </ul>
-                            </div>
-
-                            <div class="margin-bottom-30">
-                                <h4>CERTIFICATIONS</h4>
-                                <div class="border-style-2 margin-bottom-30"></div>
-                                <ul class="list-style margin-left-10">
-                                    <li><i class="fa fa-angle-right margin-right-10"></i> Surgical or internal medicine</li>
-                                    <li><i class="fa fa-angle-right margin-right-10"></i> Age range of patients</li>
-                                    <li><i class="fa fa-angle-right margin-right-10"></i> Diagnostic or therapeutic</li>
-                                    <li><i class="fa fa-angle-right margin-right-10"></i> Organ-based or technique-based</li>
-                                </ul>
-                            </div>
                         </div>
                     </div>
                 </div>

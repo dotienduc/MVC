@@ -1,7 +1,6 @@
 <?php
-require_once __DIR__ . '../../../vendor/autoload.php';
 
-use App\connect\Connection;
+use App\core\Registry;
 
 class Schedule
 {
@@ -9,7 +8,7 @@ class Schedule
 
 	public function __construct()
 	{
-		$this->conn = Connection::connectDb();
+		$this->conn = Registry::getInstance()->database;
 	}
 
 	//CURD Schedule

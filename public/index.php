@@ -1,13 +1,13 @@
 <?php
 
-// require_once "../app/init.php";
-
-// $app = new App;
-
 require_once __DIR__ . '../../vendor/autoload.php';
 
 use App\core\App;
 use App\core\Controller;
 
+$config = require_once(dirname(__FILE__).'/../config/main.php');
+
+
 session_start();
-$app = new App;
+$app = App::getInstance();
+$app->run($config);

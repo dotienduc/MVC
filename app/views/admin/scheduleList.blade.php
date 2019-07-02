@@ -52,32 +52,6 @@
 						</div>
 					</div>
 					<div class="panel-body">
-						<div class="row">
-							<div class="panel-header">
-								<div class="col-sm-8">
-									<div class="dataTables_length">
-										<label>Display <select name="example_length">
-											<option value="10">10</option>
-											<option value="25">25</option>
-											<option value="50">50</option>
-											<option value="100">100</option>
-										</select> records per page</label>
-									</div>
-								</div>
-								<div class="col-sm-4">
-									<div class="dataTables_length" id="example_length">
-										<div class="input-group custom-search-form">
-											<input type="search" class="form-control" placeholder="search..">
-											<span class="input-group-btn">
-												<button class="btn btn-primary" type="button">
-													<span class="glyphicon glyphicon-search"></span>
-												</button>
-											</span>
-										</div><!-- /input-group -->
-									</div>
-								</div>
-							</div>
-						</div>
 						<div class="table-responsive">
 							<table class="table table-bordered table-hover">
 								<thead>
@@ -93,17 +67,6 @@
 									
 								</tbody>
 							</table>
-						</div>
-						<div class="page-nation text-right">
-							<ul class="pagination pagination-large">
-								<li class="disabled"><span>«</span></li>
-								<li class="active"><span>1</span></li>
-								<li><a href="#">2</a></li>
-								<li class="disabled"><span>...</span></li><li>
-									<li><a rel="next" href="#">Next</a></li>
-								</ul>
-							</div>
-
 						</div>
 					</div>
 				</div>
@@ -149,7 +112,6 @@
 										</select>
 									</div>
 									<div class="reset button">
-										<a href="#" class="btn btn-primary">Reset</a>
 										<input type="hidden" id="hidden_time" name="hidden_time">
 										<input type="hidden" id="hidden_idTimeserving" name="hidden_idTimeserving">
 										<input type="hidden" id="hidden_idDoctor" name="hidden_idDoctor">

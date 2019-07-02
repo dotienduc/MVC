@@ -6,7 +6,7 @@
 			<div class="col-md-4">
 				<div class="mini-title inner-style-2">
 					<h3>EXPERIENCE Doctor</h3>
-					<p><a href="index-one.html">Home</a> <span class="fa fa-angle-right"></span> <a href="#">Our Doctor</a></p>
+					<p><a href="../home/index">Home</a> <span class="fa fa-angle-right"></span> <a href="../BacsiController/listDoctor">Our Doctor</a></p>
 				</div>
 			</div>
 		</div>

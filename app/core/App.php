@@ -1,45 +1,29 @@
 <?php
 namespace App\core;
 
+use App\connect\Connection;
 
 class App
 {
-	protected $controller = 'home';
+	private static $router;
+	private static $instance;
 
-	protected $method = 'index';
+	private function __construct(){}
 
-	protected $params = [];
-
-	public function __construct()
+	public static function getInstance()
 	{
-		$url = $this->parseURL();
-
-		if(file_exists('../app/controllers/' . $url[0] . '.php'))
-		{
-			$this->controller = $url[0];
-			unset($url[0]);
+		if(!isset(self::$instance)){
+			self::$router = new Router();
+			self::$instance = new self;
 		}
-
-		require_once '../app/controllers/' . $this->controller . '.php';
-
-		$this->controller = new $this->controller;
-
-		if(method_exists($this->controller, $url[1]))
-		{
-			$this->method = $url[1];
-			unset($url[1]);
-		}
-
-		$this->params = $url ? array_values($url) : [];
-
-		call_user_func_array([$this->controller, $this->method], $this->params);
+		return self::$instance;
 	}
 
-	public function parseURL()
+	public function run($config)
 	{
-		if(isset($_GET['url']))
-		{
-			return $url = explode('/', filter_var(rtrim($_GET['url'], '/'), FILTER_SANITIZE_URL));
-		}
+		Registry::getInstance()->config   = $config;
+		Registry::getInstance()->database = Connection::connectDb();
+		self::$router->run();
 	}
+
 }

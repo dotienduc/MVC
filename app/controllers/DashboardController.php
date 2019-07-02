@@ -19,22 +19,26 @@ class DashboardController extends Controller
 		//Check user session
 		Authentication::checkAuth();
 
-		$blade = new Blade('../app/views/admin', '../app/cache');
-
-		echo $blade->make('dashboard', ['infoAccount' => $_SESSION['info']]);
+		$this->render('admin.dashboard');
 	}
 
 	//Function display form login
 	public function login()
 	{
-		$blade = new Blade('../app/views/admin', '../app/cache');
-
-		echo $blade->make('login');
+		if(isset($_SESSION['info']))
+		{
+			$this->middleware($_SESSION['info']['role']);
+		}
+		$this->render('admin.login');
 	}
 
 	//Function display form register
 	public function register()
 	{
+		if(isset($_SESSION['info']))
+		{
+			$this->middleware($_SESSION['info']['role']);
+		}
 		if(isset($_POST['register']))
 		{
 			$username = $_POST['username'];
@@ -47,9 +51,8 @@ class DashboardController extends Controller
 			header('location: http://localhost/mvc/public/DashboardController/dashBoard');
 			exit();
 		}
-		$blade = new Blade('../app/views/admin', '../app/cache');
 
-		echo $blade->make('register');
+		$this->render('admin.register');
 	}
 	
 
@@ -57,6 +60,7 @@ class DashboardController extends Controller
 	public function logout()
 	{
 		unset($_SESSION['auth']);
+		session_destroy();
 		header('location: http://localhost/mvc/public/DashboardController/login');
 		exit();
 	}
@@ -64,9 +68,11 @@ class DashboardController extends Controller
 	//Function display table users
 	public function listAccount()
 	{
-		$blade = new Blade('../app/views/admin', '../app/cache');
-
-		echo $blade->make('listAccount', ['infoAccount' => $_SESSION['info']]);
+		if(isset($_SESSION['info']))
+		{
+			$this->middleware($_SESSION['info']['role']);
+		}
+		$this->render('admin.listAccount', ['infoAccount' => $_SESSION['info']]);
 	}
 }
 

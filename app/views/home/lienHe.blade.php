@@ -92,7 +92,6 @@
 								<button class="btn btn-theme" type="submit" id="submit" value="Submit Form">Send Message</button>
 							</div>
 						</div>
-						<div id="form-messages"></div>
 					</form>
 				</div>
 				<div class="col-md-5 contact-info margin-top-60">

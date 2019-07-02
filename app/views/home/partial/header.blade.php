@@ -34,14 +34,14 @@
                             <span class="icon-bar"></span>
                         </button>
                         @if(empty($id))
-                        <a class="navbar-brand dis-none" href="index-2.html"><img src="../img/logo-black.png" alt="">
+                        <a class="navbar-brand dis-none" href="../home/index"><img src="../img/logo-black.png" alt="">
                         </a>
-                        <a class="navbar-brand dis-block" href="index-2.html"><img src="../img/logo-black.png" alt="">
+                        <a class="navbar-brand dis-block" href="../home/index"><img src="../img/logo-black.png" alt="">
                         </a>
                         @else
-                        <a class="navbar-brand dis-none" href="index-2.html"><img src="../../img/logo-black.png" alt="">
+                        <a class="navbar-brand dis-none" href="../../home/index"><img src="../../img/logo-black.png" alt="">
                         </a>
-                        <a class="navbar-brand dis-block" href="index-2.html"><img src="../../img/logo-black.png" alt="">
+                        <a class="navbar-brand dis-block" href="../../home/index"><img src="../../img/logo-black.png" alt="">
                         </a>
                         @endif
                     </div>
@@ -86,19 +86,6 @@
                             </li>
                             <li>
                                 <div class="dropdown-buttons">
-                                    <div class="btn-group menu-search-box">
-                                        <button type="button" class="btn dropdown-toggle" id="header-drop-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon icon-Search"></i></button>
-                                        <ul class="dropdown-menu dropdown-menu-right dropdown-animation" aria-labelledby="header-drop-3">
-                                            <li>
-                                                <form role="search" class="search-box">
-                                                    <div class="form-group">
-                                                        <input type="text" class="form-control" placeholder="Search">
-                                                        <i class="icon icon-Search form-control-feedback"></i>
-                                                    </div>
-                                                </form>
-                                            </li>
-                                        </ul>
-                                    </div>
                                     <div class="btn-group shopping-cart">
                                         <button type="button" class="btn dropdown-toggle" id="header-drop-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon icon-ShoppingCart"></i><span class="menu-cart badge"></span></button>
                                         <ul class="dropdown-menu dropdown-menu-right cart dropdown-animation" aria-labelledby="header-drop-4">

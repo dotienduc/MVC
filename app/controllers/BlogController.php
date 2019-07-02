@@ -20,8 +20,7 @@ class BlogController extends Controller
 		//Get list comment from model Blog
 		$listComment = $this->blog->listComments();
 
-		$blade = new Blade('../app/views/home', '../app/cache');
-		echo $blade->make('danhSachBlog', ['blogs' => $blogs, 'listComment' => $listComment]);
+		$this->render('home.danhSachBlog', ['blogs' => $blogs, 'listComment' => $listComment]);
 	}
 
 	//Function display detail blog
@@ -33,10 +32,9 @@ class BlogController extends Controller
 		//Get list recentBlog from Model Blog
 		$recentBlogs = $this->blog->getRecentPosts($id);
 
-		$blade = new Blade('../app/views/home', '../app/cache');
-		echo $blade->make('chiTietBlog', ['blog' => $blog, 'id' => $id,
-										'recentBlogs' => $recentBlogs
-										]);
+		$this->render('home.chiTietBlog', ['blog' => $blog, 'id' => $id,
+			'recentBlogs' => $recentBlogs
+		]);
 	}
 
 	//Function display list comment
@@ -49,11 +47,9 @@ class BlogController extends Controller
 		//Get all comment from model Blog
 		$comments = $this->blog->getAllComment($_POST['id_blog']);
 
-		$blade = new Blade('../app/views/home/dataAjax', '../app/cache');
-		echo $blade->make('loadDataComment', ['listComment' => $listComment, 
-							'comments' => $comments
-						]);
-
+		$this->render('home.dataAjax.loadDataComment', ['listComment' => $listComment, 
+			'comments' => $comments
+		]);
 	}
 
 	//Function add comment

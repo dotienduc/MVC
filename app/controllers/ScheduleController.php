@@ -19,9 +19,7 @@ class ScheduleController extends Controller
 		//Get timeserving from model Schedule
 		$timeserving = $this->schedule->getTimeserving();
 
-		$blade = new Blade('../app/views/admin', '../app/cache');
-
-		echo $blade->make('scheduleList', ['timeserving' => $timeserving]);
+		$this->render('admin.scheduleList', ['timeserving' => $timeserving]);
 	}
 
 	//Function display form add schedule
@@ -33,9 +31,7 @@ class ScheduleController extends Controller
 		//Get timeserving from model Schedule
 		$timeserving = $this->schedule->getTimeserving();
 
-		$blade = new Blade('../app/views/admin', '../app/cache');
-
-		echo $blade->make('formSchedule', ['specialist' => $specialist, 'timeserving' => $timeserving]);
+		$this->render('admin.formSchedule', ['specialist' => $specialist, 'timeserving' => $timeserving]);
 	}
 
 	//Function perform multiSelect DropBox Doctor
@@ -77,9 +73,7 @@ class ScheduleController extends Controller
 		//Get specialist from model Doctor
 		$specialist = $this->doctor->getListSpeacialist();
 
-		$blade = new Blade('../app/views/admin/dataAjax', '../app/cache');
-
-		echo $blade->make('TableSchedule', ['schedule' => $schedule, 'specialist' => $specialist]);
+		$this->render('admin.dataAjax.TableSchedule', ['schedule' => $schedule, 'specialist' => $specialist]);
 	}
 
 	//Function edit timeserving

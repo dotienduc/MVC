@@ -9,6 +9,7 @@ class BacsiController extends Controller
 	public function __construct()
 	{
 		$this->doctor = $this->model('Doctor');
+
 	}
 
 	//function display table doctor
@@ -17,10 +18,7 @@ class BacsiController extends Controller
 		//Get list doctor from model Doctor
 		$doctors = $this->doctor->getListDoctor();
 
-
-		$blade = new Blade('../app/views/home', '../app/cache');
-
-		echo $blade->make('danhSachBacSi', ['doctors' => $doctors]);
+		$this->render('home.danhSachBacSi', ['doctors' => $doctors]);
 	}
 
 	//Function display info Doctor
@@ -32,16 +30,13 @@ class BacsiController extends Controller
 		//get calendar doctor
 		$calendars = $this->doctor->getCalendar($id);
 
-		$blade = new Blade('../app/views/home', '../app/cache');
-
-		echo $blade->make('thongTinBacSi',
-			['doctor' => $profile, 'id' => $id
+		$this->render('home.thongTinBacSi', ['doctor' => $profile, 'id' => $id
 			, 'calendars' => $calendars
 		]);
 	}
 
 
-	//Admin
+	//------------Admin-------------
 
 	//Function fetch data list doctor
 	public function fetch_data()
@@ -49,10 +44,7 @@ class BacsiController extends Controller
 		//Get list doctor from model Doctor
 		$doctors = $this->doctor->getListDoctor();
 
-
-		$blade = new Blade('../app/views/admin/dataAjax', '../app/cache');
-
-		echo $blade->make('TableDoctor', ['doctors' => $doctors]);
+		$this->render('admin.dataAjax.TableDoctor', ['doctors' => $doctors]);
 	}
 
 	//Function display table Doctor
@@ -61,14 +53,16 @@ class BacsiController extends Controller
 		//Get specialist from model Doctor
 		$specialist = $this->doctor->getListSpeacialist();
 
-		$blade = new Blade('../app/views/admin', '../app/cache');
-
-		echo $blade->make('doctorList', ['specialist' => $specialist]);
+		$this->render('admin.doctorList', ['specialist' => $specialist]);
 	}
 
 	//Function display form Doctor
 	public function formDoctor()
 	{
+		if(isset($_SESSION['info']))
+		{
+			$this->middleware($_SESSION['info']['role']);
+		}
 		if(isset($_POST['btn-Save']))
 		{
 			$name = $_POST['name'];
@@ -122,9 +116,7 @@ class BacsiController extends Controller
 			//Get specialist from model Doctor
 			$specialist = $this->doctor->getListSpeacialist();
 
-			$blade = new Blade('../app/views/admin', '../app/cache');
-
-			echo $blade->make('formDoctor', ['specialist' => $specialist]);
+			$this->render('admin.formDoctor', ['specialist' => $specialist]);
 		}
 	}
 

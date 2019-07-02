@@ -72,7 +72,6 @@
 							</div>     
 							<div class="col-sm-12 form-group">
 									<div class="col-sm-12 reset-button">
-										<a href="#" class="btn btn-warning">Nhập lại</a>
 										<button type="submit" name="btn-Save" class="btn btn-success">Lưu</button>
 									</div>
 								</form>

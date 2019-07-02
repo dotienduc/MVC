@@ -22,64 +22,25 @@
 				<div class="blog-sideber">
 					<div class="widget clearfix">
 						<div class="sideber-title">
-							<h4>TOP SELLERS</h4>
+							<h4>Sản phẩm khuyến mãi</h4>
 						</div>
+						@foreach($saleProducts as $product)
 						<div class="shop-single-item">
 							<div class="shop-sell-item">
-								<img alt="#" src="../img/shop/1.jpg">
+								<img alt="#" style="height: 100px; width: 150px;" src="../img/shop/{{ $product['image'] }}">
 							</div>
 							<div class="shop-sell-details">
-								<h5><a href="#">Your Title Here</a></h5>
-								<h5>$ 50.00</h5>
+								<h5><a href="../ShopController/productDetail/{{ $product['id'] }}">{{ $product['name'] }}</a></h5>
+								<h5>$ {{ $product['promotion_price'] }}</h5>
 							</div>
 						</div>
-						<div class="widget">
-							<div class="shop-sell-item">
-								<img alt="#" src="../img/shop/2.jpg">
-							</div>
-							<div class="shop-sell-details">
-								<h5><a href="#">Boys T-shirt</a></h5>
-								<h5>$ 50.00</h5>
-							</div>
-						</div>
+						@endforeach
 					</div>
 				</div>
 			</div>
 			<div class="col-md-9">
 				<div class="shop-right-area">
 					<div class="shop-tab-area">
-						<!--NAV PILL-->
-						<div class="shop-tab-pill">
-							<ul>
-								<li class="active" id="p-mar">
-									<a data-toggle="pill" href="#grid">
-										<i class="fa fa-th" aria-hidden="true"></i>
-										<span>Grid</span>
-									</a>
-								</li>
-								<li>
-									<a data-toggle="pill" href="#list">
-										<i class="fa fa-th-list" aria-hidden="true"></i>
-										<span>List</span>
-									</a>
-								</li>
-								<li class="product-size-deatils">
-									<div class="show-label">
-									</div>
-								</li>
-								<li class="p-4">
-									<div class="sort-position">
-										<label><i class="fa fa-sort-amount-asc"></i>Sort by : </label>
-										<select>
-											<option value="position" selected="selected">Position</option>
-											<option value="Name">Name</option>
-											<option value="Price">Price</option>
-										</select>
-									</div>
-								</li>
-							</ul>
-						</div>
-						<!--NAV PILL-->
 						<div class="tab-content">
 							<div class="row tab-pane active" id="grid">
 								@foreach($products as $product)

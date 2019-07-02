@@ -1,18 +1,14 @@
 <?php
 
-require_once __DIR__ . '../../../vendor/fzaninotto/faker/src/autoload.php';
-require_once __DIR__ . '../../../vendor/autoload.php';
+use App\core\Registry;
 
-use App\connect\Connection;
-use App\iplm\BlogIplm;
-
-class Blog implements BlogIplm
+class Blog 
 {
 	private $conn;
 
 	public function __construct()
 	{
-		$this->conn = Connection::connectDb();
+		$this->conn = Registry::getInstance()->database;
 	}
 
 	public function insertFakeData()

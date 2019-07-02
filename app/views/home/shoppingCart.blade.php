@@ -41,7 +41,7 @@
 									<a href="#"><img alt="#" src="../img/shop/{{ $item['product_image'] }}"></a>
 								</td>
 								<td>
-									<h4><a href="#">{{ $item['product_name'] }}</a></h4>
+									<h4><a href="../ShopController/productDetail/{{ $item['product_id'] }}">{{ $item['product_name'] }}</a></h4>
 								</td>
 								<td>
 									<p>$ {{ $item['product_price'] }}</p>
@@ -118,6 +118,9 @@
 			var action = "quantity_change";
 			if(quantity != '')
 			{
+				if(quantity <= 0){
+					quantity = 1;
+				}
 				$.ajax({
 					url: "../ShopController/shoppingCart",
 					method: "POST",

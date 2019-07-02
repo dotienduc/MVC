@@ -9,6 +9,10 @@ class AccountController extends Controller
 
 	public function __construct()
 	{
+		if(isset($_SESSION['info']))
+		{
+			$this->middleware($_SESSION['info']['role']);
+		}
 		$this->account = $this->model('User');
 		$this->auth = $this->model('Auth');
 	}
@@ -18,9 +22,7 @@ class AccountController extends Controller
 	{
 		$accounts = $this->account->getData();
 
-		$blade = new Blade('../app/views/admin/dataAjax', '../app/cache');
-
-		echo $blade->make('TableAccount', ['accounts' => $accounts]);
+		$this->render('admin.dataAjax.TableAccount', ['accounts' => $accounts]);
 	}
 
 	//function CURD user

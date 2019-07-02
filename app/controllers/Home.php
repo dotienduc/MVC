@@ -1,6 +1,5 @@
 <?php
 
-use Jenssegers\Blade\Blade;
 use App\core\Controller;
 use App\SendEmail;
 
@@ -30,9 +29,7 @@ class Home extends Controller
 		//Get list banner from model Doctor
 		$banners = $this->doctor->getBanner();
 
-		$blade = new Blade('../app/views/home', '../app/cache');
-
-		echo $blade->make('trangtru', [
+		$this->render('home.trangtru', [
 			'specialist' => $specialist,
 			'banners' => $banners
 		]);
@@ -41,8 +38,7 @@ class Home extends Controller
 	//Function display form lienHe
 	public function lienHe()
 	{
-		$blade = new Blade('../app/views/home', '../app/cache');
-		echo $blade->make('lienHe');
+		$this->render('home.lienHe');
 	}
 
 	//Function add question 

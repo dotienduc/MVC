@@ -12,12 +12,12 @@ class SendEmail
 		$mail = new PHPMailer(true);
 
 		try {
-		    $mail->IsSMTP(); // enable SMTP
-			$mail->SMTPDebug = 1; // debugging: 1 = errors and messages, 2 = messages only
-			$mail->SMTPAuth = true; // authentication enabled
-			$mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for Gmail
+		    $mail->IsSMTP(); 
+			$mail->SMTPDebug = 1; 
+			$mail->SMTPAuth = true; 
+			$mail->SMTPSecure = 'ssl'; 
 			$mail->Host = "smtp.gmail.com";
-			$mail->Port = 465; // or 587
+			$mail->Port = 465;
 			$mail->IsHTML(true);
 			$mail->Username = "dotienduc1998@gmail.com";
 			$mail->Password = "Dotienduc1998";
