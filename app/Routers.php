@@ -50,6 +50,10 @@ Router::register('/ScheduleController/listSchedule');
 Router::register('/ScheduleController/editTimeserving');
 Router::register('/ScheduleController/fetch_data');
 Router::register('/ScheduleController/selectTimework');
+Router::register('/ScheduleController/multiSelect');
+Router::register('/ScheduleController/filterFormSchedule');
+Router::register('/ScheduleController/insertSchedule');
+Router::register('/ScheduleController/deleteSchedule');
 
 //Appoinent
 Router::register('/AppointentController/formAppointent');
@@ -57,6 +61,8 @@ Router::register('/AppointentController/listAppointent');
 Router::register('/AppointentController/fetch_data');
 Router::register('/AppointentController/deleteAppointent');
 Router::register('/AppointentController/editAppointent');
+Router::register('/AppointentController/insertAppointent');
+Router::register('/AppointentController/cofirmEmail/last_id/confirmCode');
 
 //Confirm
 Router::register('/AppointentController/cofirmEmail/id/confirmCode');

@@ -1,18 +1,6 @@
 <?php $__env->startSection('css'); ?>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
-<!-- <section class="inner-bg over-layer-black" style="background-image: url('../img/bg/4.jpg')">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-4">
-				<div class="mini-title inner-style-2">
-					<h3>Shop </h3>
-					<p><a href="index-one.html">Home</a> <span class="fa fa-angle-right"></span> <a href="#">Shop </a></p>
-				</div>
-			</div>
-		</div>
-	</div>
-</section> -->
 
 <section class="shop-area">
 	<div class="container">
@@ -46,23 +34,23 @@
 								<div class="col-md-4 col-sm-4">
 									<div class="product-item">
 										<div class="product-image">
-											<a class="product-img" href="../ShopController/productDetail/<?php echo e($product['id']); ?>">
-												<img class="primary-img" src="../img/shop/<?php echo e($product['image']); ?>" alt="" />
+											<a class="product-img" href="../ShopController/productDetail/<?php echo e($product->id); ?>">
+												<img class="primary-img" src="../img/shop/<?php echo e($product->image); ?>" alt="" />
 											</a>
 										</div>
-										<?php if($product['promotion_price'] == 0): ?>
+										<?php if($product->promotion_price == 0): ?>
 										<?php else: ?>
 										<span class="on-sale">
 											<span class="sale-text">Sale</span>
 										</span>
 										<?php endif; ?>
 										<div class="product-action">
-											<h4><a href="../ShopController/productDetail/<?php echo e($product['id']); ?>"><?php echo e($product['name']); ?></a></h4>
-											<?php if($product['promotion_price'] == 0): ?>
-											<span class="price">$ <?php echo e($product['unit_price']); ?></span>
+											<h4><a href="../ShopController/productDetail/<?php echo e($product->id); ?>"><?php echo e($product->name); ?></a></h4>
+											<?php if($product->promotion_price == 0): ?>
+											<span class="price">$ <?php echo e($product->unit_price); ?></span>
 											<?php else: ?>
-											<span class="text-muted"><del>$ <?php echo e($product['unit_price']); ?></del></span>
-											<span class="price">$ <?php echo e($product['promotion_price']); ?></span>
+											<span class="text-muted"><del>$ <?php echo e($product->unit_price); ?></del></span>
+											<span class="price">$ <?php echo e($product->promotion_price); ?></span>
 											<?php endif; ?>
 										</div>
 										<div class="pro-action">
@@ -77,17 +65,17 @@
 														<i class="fa fa-heart" aria-hidden="true"></i>
 													</a>
 												</li>
-												<input type="hidden" name="hidden_image" id="image<?php echo e($product['id']); ?>" value="<?php echo e($product['image']); ?>">
-												<input type="hidden" name="hidden_name" id="name<?php echo e($product['id']); ?>" value="<?php echo e($product['name']); ?>">
-												<?php if($product['promotion_price'] == 0): ?>
-												<input type="hidden" name="hidden_UnitPrice" id="unit_price<?php echo e($product['id']); ?>" value="<?php echo e($product['unit_price']); ?>">
-												<input type="hidden" name="hidden_PromotionPrice" id="promotion_price<?php echo e($product['id']); ?>" value="0">
+												<input type="hidden" name="hidden_image" id="image<?php echo e($product->id); ?>" value="<?php echo e($product->image); ?>">
+												<input type="hidden" name="hidden_name" id="name<?php echo e($product->id); ?>" value="<?php echo e($product->name); ?>">
+												<?php if($product->promotion_price == 0): ?>
+												<input type="hidden" name="hidden_UnitPrice" id="unit_price<?php echo e($product->id); ?>" value="<?php echo e($product->unit_price); ?>">
+												<input type="hidden" name="hidden_PromotionPrice" id="promotion_price<?php echo e($product->id); ?>" value="0">
 												<?php else: ?>
-												<input type="hidden" name="hidden_PromotionPrice" id="promotion_price<?php echo e($product['id']); ?>" value="<?php echo e($product['promotion_price']); ?>">
-												<input type="hidden" name="hidden_UnitPrice" id="unit_price<?php echo e($product['id']); ?>" value="0">
+												<input type="hidden" name="hidden_PromotionPrice" id="promotion_price<?php echo e($product->id); ?>" value="<?php echo e($product->promotion_price); ?>">
+												<input type="hidden" name="hidden_UnitPrice" id="unit_price<?php echo e($product->id); ?>" value="0">
 												<?php endif; ?>
-												<input type="hidden" name="hidden_quantity" id="quantity<?php echo e($product['id']); ?>" value="1">
-												<li class="add_cart" id="<?php echo e($product['id']); ?>">
+												<input type="hidden" name="hidden_quantity" id="quantity<?php echo e($product->id); ?>" value="1">
+												<li class="add_cart" id="<?php echo e($product->id); ?>">
 													<a class="" href="#">
 														<i class="fa fa-shopping-cart" aria-hidden="true"></i>
 													</a>

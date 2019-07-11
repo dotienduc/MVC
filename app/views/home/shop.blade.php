@@ -2,18 +2,6 @@
 @section('css')
 @endsection
 @section('content')
-<!-- <section class="inner-bg over-layer-black" style="background-image: url('../img/bg/4.jpg')">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-4">
-				<div class="mini-title inner-style-2">
-					<h3>Shop </h3>
-					<p><a href="index-one.html">Home</a> <span class="fa fa-angle-right"></span> <a href="#">Shop </a></p>
-				</div>
-			</div>
-		</div>
-	</div>
-</section> -->
 
 <section class="shop-area">
 	<div class="container">
@@ -30,7 +18,7 @@
 								<img alt="#" style="height: 100px; width: 150px;" src="../img/shop/{{ $product['image'] }}">
 							</div>
 							<div class="shop-sell-details">
-								<h5><a href="../ShopController/productDetail/{{ $product['id'] }}">{{ $product['name'] }}</a></h5>
+								<h5><a href="../ShopController/productDetail/{{ $product['id']}}">{{ $product['name'] }}</a></h5>
 								<h5>$ {{ $product['promotion_price'] }}</h5>
 							</div>
 						</div>
@@ -47,23 +35,23 @@
 								<div class="col-md-4 col-sm-4">
 									<div class="product-item">
 										<div class="product-image">
-											<a class="product-img" href="../ShopController/productDetail/{{ $product['id'] }}">
-												<img class="primary-img" src="../img/shop/{{ $product['image'] }}" alt="" />
+											<a class="product-img" href="../ShopController/productDetail/{{ $product->id }}">
+												<img class="primary-img" src="../img/shop/{{ $product->image }}" alt="" />
 											</a>
 										</div>
-										@if($product['promotion_price'] == 0)
+										@if($product->promotion_price == 0)
 										@else
 										<span class="on-sale">
 											<span class="sale-text">Sale</span>
 										</span>
 										@endif
 										<div class="product-action">
-											<h4><a href="../ShopController/productDetail/{{ $product['id'] }}">{{ $product['name'] }}</a></h4>
-											@if($product['promotion_price'] == 0)
-											<span class="price">$ {{ $product['unit_price'] }}</span>
+											<h4><a href="../ShopController/productDetail/{{ $product->id }}">{{ $product->name }}</a></h4>
+											@if($product->promotion_price == 0)
+											<span class="price">$ {{ $product->unit_price }}</span>
 											@else
-											<span class="text-muted"><del>$ {{ $product['unit_price'] }}</del></span>
-											<span class="price">$ {{ $product['promotion_price'] }}</span>
+											<span class="text-muted"><del>$ {{ $product->unit_price }}</del></span>
+											<span class="price">$ {{ $product->promotion_price }}</span>
 											@endif
 										</div>
 										<div class="pro-action">
@@ -78,17 +66,17 @@
 														<i class="fa fa-heart" aria-hidden="true"></i>
 													</a>
 												</li>
-												<input type="hidden" name="hidden_image" id="image{{ $product['id'] }}" value="{{ $product['image'] }}">
-												<input type="hidden" name="hidden_name" id="name{{ $product['id'] }}" value="{{ $product['name'] }}">
-												@if($product['promotion_price'] == 0)
-												<input type="hidden" name="hidden_UnitPrice" id="unit_price{{ $product['id'] }}" value="{{ $product['unit_price'] }}">
-												<input type="hidden" name="hidden_PromotionPrice" id="promotion_price{{ $product['id'] }}" value="0">
+												<input type="hidden" name="hidden_image" id="image{{ $product->id }}" value="{{ $product->image }}">
+												<input type="hidden" name="hidden_name" id="name{{ $product->id }}" value="{{ $product->name }}">
+												@if($product->promotion_price == 0)
+												<input type="hidden" name="hidden_UnitPrice" id="unit_price{{ $product->id }}" value="{{ $product->unit_price }}">
+												<input type="hidden" name="hidden_PromotionPrice" id="promotion_price{{ $product->id }}" value="0">
 												@else
-												<input type="hidden" name="hidden_PromotionPrice" id="promotion_price{{ $product['id'] }}" value="{{ $product['promotion_price'] }}">
-												<input type="hidden" name="hidden_UnitPrice" id="unit_price{{ $product['id'] }}" value="0">
+												<input type="hidden" name="hidden_PromotionPrice" id="promotion_price{{ $product->id }}" value="{{ $product->promotion_price }}">
+												<input type="hidden" name="hidden_UnitPrice" id="unit_price{{ $product->id }}" value="0">
 												@endif
-												<input type="hidden" name="hidden_quantity" id="quantity{{ $product['id'] }}" value="1">
-												<li class="add_cart" id="{{ $product['id'] }}">
+												<input type="hidden" name="hidden_quantity" id="quantity{{ $product->id }}" value="1">
+												<li class="add_cart" id="{{ $product->id }}">
 													<a class="" href="#">
 														<i class="fa fa-shopping-cart" aria-hidden="true"></i>
 													</a>

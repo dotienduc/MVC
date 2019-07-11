@@ -3,6 +3,8 @@
 use App\core\Controller;
 use App\SendEmail;
 
+use App\model\Question;
+
 class QuestionController extends Controller
 {
 	private $question;
@@ -10,38 +12,46 @@ class QuestionController extends Controller
 
 	public function __construct()
 	{
-		$this->question = $this->model('Question');
+		$this->question = new Question;
 		$this->sendEmail = new SendEmail;
 	}
 
+	//Display screen list question
 	public function listQuestion()
 	{
 		$this->render('admin.ListQuestion');
 	}
 
+	//Display screen form question
 	public function formQuestion($id)
 	{
-		$question = $this->question->getDetail($id);
+		//Get detail question follow id 
+		$question = $this->question->findById(['id' => $id]);
 
 		$this->render('admin.FormQuestion', ['id' => $id, 'question' => $question]);
 	}
 
+	//Display all data question by ajax
 	public function fetch_data()
 	{
-		$questions = $this->question->getData();
+		//Get all object question
+		$questions = $this->question->findAll(['status' => 0]);
 
 		$this->render('admin.dataAjax.TableQuestion', ['questions' => $questions]);
 	}
 
+	//Answer question
 	public function answerQuestion()
 	{
-		$id_question = $_POST['id_questionHidden'];
-		$email = $_POST['id_emailHidden'];
-		$message = $_POST['message'];
+		//Get question follow id
+		$question = $this->question->findById(['id' => $_POST['id_questionHidden']]);
 
-		$this->question->updateStatusQuestion($id_question);
+		//Edit status of question when answer
+		$question->status = '1';
+		$question->update();
 
-		$this->sendEmail->send($message, $email);
+		//Send email 
+		$this->sendEmail->send($_POST['message'], $_POST['id_emailHidden'], "Phản hồi của bác sĩ");
 	}
 
 }

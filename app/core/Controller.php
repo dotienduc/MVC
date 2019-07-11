@@ -7,6 +7,7 @@ class Controller
 {
 	public function __construct(){}
 
+	//Redirect page
 	public function redirect($url, $isEnd = true, $responseCode = 302)
 	{
 		header('location:'.$url, true, $responseCode);
@@ -14,6 +15,8 @@ class Controller
 			die();
 	}
 
+
+	//Render view 
 	public function render($view, $data = [])
 	{
 		$rootDir      			= Registry::getInstance()->config['rootDir'];
@@ -40,24 +43,20 @@ class Controller
 		echo $blade->make($fileView, $data);
 	}
 
+	//Middlware 
 	public function middleware($role)
 	{
-		if($role !== 1)
+		if($role != 1)
 		{
 			header("location:javascript://history.go(-1)");
 		}
 	}
 
+	
 	public function dd($data)
 	{
 		echo "<pre>";
 		print_r($data);
 		die();
-	}
-
-	public function model($model)
-	{
-		require_once '../app/models/' . $model . '.php';
-		return new $model();
 	}
 }

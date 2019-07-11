@@ -62,7 +62,7 @@
                     <div class="col-md-5">
                         
                         <div class="team-item-2">
-                            <img src="../../img/team/<?php echo e($doctor['image']); ?>" alt="">
+                            <img src="../../img/team/<?php echo e($doctor->image); ?>" alt="">
                             <div class="team-contact">
                                 <ul>
                                     <li><a href="#"><i class="fa fa-twitter"></i></a></li>
@@ -72,8 +72,8 @@
                                 </ul>
                             </div>
                             <div class="team-content">
-                                <h4><a href="#">Dr. <?php echo e($doctor['name']); ?></a></h4>
-                                <h6><?php echo e($doctor['name_specialist']); ?></h6>
+                                <h4><a href="#">Dr. <?php echo e($doctor->name); ?></a></h4>
+                                <h6><?php echo e($specialist->name_specialist); ?></h6>
                                 <div class="team-content-icon">
                                     <i class="flaticon-heart"></i>
                                 </div>
@@ -82,10 +82,10 @@
                         <div class="team-details">
                             <address>
                                 <ul>
-                                    <li><i class="pe-7s-map-marker"></i><?php echo e($doctor['address']); ?></li>
-                                    <li><i class="pe-7s-call"></i>Phone: <?php echo e($doctor['phone']); ?></li>
+                                    <li><i class="pe-7s-map-marker"></i><?php echo e($doctor->address); ?></li>
+                                    <li><i class="pe-7s-call"></i>Phone: <?php echo e($doctor->phone); ?></li>
                                     <li><i class="pe-7s-clock"></i>Friday - Sunday Closed.</li>
-                                    <li><i class="pe-7s-mail"></i><a href="mailto:">Email: <?php echo e($doctor['email']); ?></a></li>
+                                    <li><i class="pe-7s-mail"></i><a href="mailto:">Email: <?php echo e($doctor->email); ?></a></li>
                                     <li><i class="pe-7s-global"></i><a href="#">Web: www.bdcoder.com</a></li>
                                 </ul>
                             </address>
@@ -111,10 +111,10 @@
                     </div>
                     <div class="col-md-7 team-area">
                         <div class="team-details-content">
-                            <h2><a href="#"> DR. <?php echo e($doctor['name']); ?> </a></h2>
-                            <h6>Khoa <?php echo e($doctor['name_specialist']); ?></h6>
+                            <h2><a href="#"> DR. <?php echo e($doctor->name); ?> </a></h2>
+                            <h6>Khoa <?php echo e($specialist->name_specialist); ?></h6>
                             <h4>Dược sĩ</h4>
-                            <p><?php echo e($doctor['description']); ?></p>
+                            <p><?php echo e($doctor->description); ?></p>
 
                             <h4>Lịch sử chuyên ngành</h4>
                             <ul class="list-style margin-left-10">

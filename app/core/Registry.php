@@ -10,6 +10,9 @@ class Registry
 
 	private function __construct(){}
 
+	/**
+     * gets the instance via lazy initialization
+     */
 	public static function getInstance()
 	{
 		if(!isset(self::$instance))
@@ -17,6 +20,9 @@ class Registry
 		return self::$instance;
 	}
 
+	/**
+	* Set get method magic 
+	*/
 	public function __set($name, $value)
 	{
 		if(!isset($this->storage[$name]))

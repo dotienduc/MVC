@@ -62,7 +62,7 @@
                     <div class="col-md-5">
                         
                         <div class="team-item-2">
-                            <img src="../../img/team/{{ $doctor['image'] }}" alt="">
+                            <img src="../../img/team/{{ $doctor->image }}" alt="">
                             <div class="team-contact">
                                 <ul>
                                     <li><a href="#"><i class="fa fa-twitter"></i></a></li>
@@ -72,8 +72,8 @@
                                 </ul>
                             </div>
                             <div class="team-content">
-                                <h4><a href="#">Dr. {{ $doctor['name'] }}</a></h4>
-                                <h6>{{ $doctor['name_specialist'] }}</h6>
+                                <h4><a href="#">Dr. {{ $doctor->name }}</a></h4>
+                                <h6>{{ $specialist->name_specialist}}</h6>
                                 <div class="team-content-icon">
                                     <i class="flaticon-heart"></i>
                                 </div>
@@ -82,10 +82,10 @@
                         <div class="team-details">
                             <address>
                                 <ul>
-                                    <li><i class="pe-7s-map-marker"></i>{{ $doctor['address'] }}</li>
-                                    <li><i class="pe-7s-call"></i>Phone: {{ $doctor['phone'] }}</li>
+                                    <li><i class="pe-7s-map-marker"></i>{{ $doctor->address }}</li>
+                                    <li><i class="pe-7s-call"></i>Phone: {{ $doctor->phone }}</li>
                                     <li><i class="pe-7s-clock"></i>Friday - Sunday Closed.</li>
-                                    <li><i class="pe-7s-mail"></i><a href="mailto:">Email: {{ $doctor['email'] }}</a></li>
+                                    <li><i class="pe-7s-mail"></i><a href="mailto:">Email: {{ $doctor->email }}</a></li>
                                     <li><i class="pe-7s-global"></i><a href="#">Web: www.bdcoder.com</a></li>
                                 </ul>
                             </address>
@@ -111,10 +111,10 @@
                     </div>
                     <div class="col-md-7 team-area">
                         <div class="team-details-content">
-                            <h2><a href="#"> DR. {{ $doctor['name'] }} </a></h2>
-                            <h6>Khoa {{ $doctor['name_specialist'] }}</h6>
+                            <h2><a href="#"> DR. {{ $doctor->name }} </a></h2>
+                            <h6>Khoa {{ $specialist->name_specialist }}</h6>
                             <h4>Dược sĩ</h4>
-                            <p>{{ $doctor['description'] }}</p>
+                            <p>{{ $doctor->description }}</p>
 
                             <h4>Lịch sử chuyên ngành</h4>
                             <ul class="list-style margin-left-10">

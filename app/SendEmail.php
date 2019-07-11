@@ -7,7 +7,7 @@ use PHPMailer\PHPMailer\Exception;
 
 class SendEmail
 {
-	public function send($message, $email)
+	public function send($message, $email, $subject = "")
 	{
 		$mail = new PHPMailer(true);
 
@@ -22,7 +22,7 @@ class SendEmail
 			$mail->Username = "dotienduc1998@gmail.com";
 			$mail->Password = "Dotienduc1998";
 			$mail->SetFrom("dotienduc1998@gmail.com");
-			$mail->Subject = "Confirm Email";
+			$mail->Subject = $subject;
 			$mail->Body = $message;
 			$mail->AddAddress($email);
 

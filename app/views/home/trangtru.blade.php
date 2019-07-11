@@ -69,12 +69,12 @@
         @foreach($banners as $row)
         <div class="item">
             <!-- Slide Background -->
-            <img src="../img/bg/{{ $row['image'] }}" alt="Slider Images"  class="slide-image"/>
+            <img src="../img/bg/{{ $row->image }}" alt="Slider Images"  class="slide-image"/>
             <div class="bs-slider-overlay"></div>
 
             <div class="slide-text slide_style_left">
-                <h1 data-animation="animated fadeInRight"> <span class="color-defult"> {{ $row['text1'] }}</span></h1>
-                <p data-animation="animated fadeInLeft">{{ $row['text2'] }}.</p>
+                <h1 data-animation="animated fadeInRight"> <span class="color-defult"> {{ $row->text1 }}</span></h1>
+                <p data-animation="animated fadeInLeft">{{ $row->text2 }}.</p>
                 <a href="#" target="_blank" class="btn btn-default" data-animation="animated fadeInLeft">Read more</a>
                 <a href="#" target="_blank"  class="btn btn-primary" data-animation="animated fadeInRight">Book Now</a>
             </div>
@@ -200,7 +200,7 @@
                                     <select name="subject" id="subject" class="form-control action" required="required">
                                         <option value="">Chủ đề</option>
                                         @foreach($specialist as $row)
-                                        <option value="{{ $row['id'] }}">{{ $row['name_specialist'] }}</option>
+                                        <option value="{{ $row->id }}">{{ $row->name_specialist }}</option>
                                         @endforeach
                                     </select>
                                 </div>

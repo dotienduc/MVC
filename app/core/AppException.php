@@ -14,6 +14,7 @@ class AppException extends Exception
 		parent::__construct($message, $code);
 	}
 
+	
 	public function error_handle($e)
 	{
 		echo "<h1 style=\"color:red\"{$e->getCode()} => {$e->getMessage()}</h1>";

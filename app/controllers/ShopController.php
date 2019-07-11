@@ -2,30 +2,43 @@
 
 use App\core\Controller;
 use App\SendEmail;
+use App\LibraryDatabase\QueryBuilder;
+
+use App\model\Products;
+use App\model\Customer;
+use App\model\Bill;
+use App\model\BillDetail;
 
 class ShopController extends Controller
 {
 	private $product;
 	private $sendEmail;
+	private $customer;
+	private $bill;
+	private $billDetail;
 
 	public function __construct()
 	{
-		$this->product = $this->model('Product');
+		$this->product = new Products;
 		$this->sendEmail = new SendEmail;
+		$this->customer  = new Customer;
+		$this->bill 	 = new Bill;
+		$this->billDetail= new BillDetail;
 	}
 
 	//Function display list product
 	public function shop()
 	{
-		//Get list product from model Product
-		$products = $this->product->getProducts();
+		$products = $this->product->findAll();
 
-		//Get list sale product from model Product
-		$saleProducts = $this->product->getSaleProducts();
+		$saleProducts = QueryBuilder::table('products')
+					  ->where('promotion_price', '!=', '0')
+					  ->orderBy('id', 'desc')
+					  ->limit(5)
+					  ->get();
 
 		$this->render('home.shop', ['products' => $products,
-						 			'saleProducts' => $saleProducts
-								]);
+						 			'saleProducts' => $saleProducts]);
 
 	}
 
@@ -91,8 +104,7 @@ class ShopController extends Controller
 	//Function display info detail product
 	public function productDetail($id)
 	{
-		//Get info product from Model Product
-		$product = $this->product->getDetailProduct($id);
+		$product = $this->product->findById(['id' => $id]);
 
 		$this->render('home.productDetail', ['id' => $id, 'product' => $product]);
 	}
@@ -101,6 +113,7 @@ class ShopController extends Controller
 	public function getItemInCart()
 	{
 		$order_table = "";
+		$countCart = 0;
 		if(!empty($_SESSION['shopping_cart']))
 		{
 			$total = 0;
@@ -122,10 +135,11 @@ class ShopController extends Controller
 			<td class="total-amount"><strong>$'.$total.'</strong></td>
 			</tr>
 			';
+			$countCart = count($_SESSION['shopping_cart']);
 		}
 		$output = array(
 			'order_table' => $order_table,
-			'cart_item' => count($_SESSION['shopping_cart'])
+			'cart_item' => $countCart
 		);
 		echo json_encode($output);
 	}
@@ -214,11 +228,41 @@ class ShopController extends Controller
 		$note = $_POST['note'];
 		$hidden_total = $_POST['hidden_total'];
 
-		//Action pay order from model Product
-		$rs = $this->product->actionPay($first_name, $last_name, $phone_number, $gender, $address, $email_address, $note, $hidden_total);
+		$this->customer->fname 		= $first_name;
+		$this->customer->lname 		= $last_name;
+		$this->customer->address 	= $address;
+		$this->customer->email 		= $email_address;
+		$this->customer->gender 	= $gender;
+		$this->customer->phone 		= $phone_number;
+		$this->customer->note 		= $note;
+		$idCustomerLastId = $this->customer->save();
 
-		//
-		$detailOrder = $this->product->getDetailOrder($rs);
+		$this->bill->id_customer 	= $idCustomerLastId;
+		$this->bill->date_order 	= date('Y-m-d');
+		$this->bill->total 			= $hidden_total;
+		$this->bill->note 			= $note;
+		$this->bill->status 		= 0;
+
+		$idBillLastId = $this->bill->save();
+
+		foreach ($_SESSION['shopping_cart'] as $keys => $values) {
+			$this->billDetail->id_bill 		= $idBillLastId;
+			$this->billDetail->id_product 	= $values["product_id"];
+			$this->billDetail->quantity 	= $values["product_quantity"];
+			$this->billDetail->price 		= $values["product_price"];
+			$this->billDetail->save();
+		}
+
+		unset($_SESSION['shopping_cart']);
+
+		$detailOrder = QueryBuilder::table('bills b')
+					 ->select('c.*', 'b.id as id_bill', 'b.total',
+					  'p.name as product_name', 'bd.quantity', 'bd.price')
+					 ->join('customers c', 'b.id_customer', '=', 'c.id')
+					 ->join('bill_detail bd', 'b.id', '=', 'bd.id_bill')
+					 ->join('products p', 'p.id', '=', 'bd.id_product')
+					 ->where('b.id', '=', $idBillLastId)
+					 ->get();
 
 		$order = '';
 		$customerDetail = '';
@@ -283,8 +327,13 @@ class ShopController extends Controller
 	//Function display list order 
 	public function listOrder()
 	{
-		//Get list order from model Product
-		$listOrder = $this->product->getListOrder();
+		$listOrder = QueryBuilder::table('bills b')
+				   ->select('c.fname', 'c.lname', 'c.address', 'c.email', 'c.phone', 'b.id',
+					'b.total', 'b.status', 'sum(bd.quantity) as quantity')
+				   ->join('customers c', 'b.id_customer', '=', 'c.id')
+				   ->join('bill_detail bd', 'b.id', '=', 'bd.id_bill')
+				   ->groupBy('b.id')
+				   ->get();
 		
 		$this->render('admin.ListOfInvoices', ['listOrder' => $listOrder]);
 	}
@@ -293,7 +342,15 @@ class ShopController extends Controller
 	public function detailOrder()
 	{
 		$id = $_POST['id_bill'];
-		$detailOrder = $this->product->getDetailOrder($id);
+
+		$detailOrder = QueryBuilder::table('bills b')
+				   ->select('c.*', 'b.id as id_bill', 'b.total', 'p.name as product_name',
+				    'bd.quantity', 'bd.price')
+				   ->join('customers c', 'b.id_customer', '=', 'c.id')
+				   ->join('bill_detail bd', 'b.id', '=', 'bd.id_bill')
+				   ->join('products p', ' p.id', '=', 'bd.id_product')
+				   ->where('b.id', '=', $id)
+				   ->get();
 
 		$order = '';
 		$customerDetail = '';
@@ -361,6 +418,8 @@ class ShopController extends Controller
 		$id_bill = $_POST['id_bill'];
 		$status = $_POST['status'];
 
-		$this->product->updateStatus($id_bill, $status);
+		$bill = $this->bill->findById(['id' => $id_bill]);
+		$bill->status = $status;
+		$bill->update();
 	}
 }

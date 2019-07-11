@@ -7,9 +7,9 @@
  <td class="search">{{ $doctor['phone'] }}</td>
  <td>{{$doctor['address']}}</td>
  <td>
- <button type="button" class="btn btn-info btn-xs edit" id="{{ $doctor['id_doctor'] }}"><i class="fa fa-pencil"></i>
+ <button type="button" class="btn btn-info btn-xs edit" id="{{ $doctor['id'] }}"><i class="fa fa-pencil"></i>
  </button>
- <button type="button" class="btn btn-danger btn-xs delete" id="{{ $doctor['id_doctor'] }}"><i class="fa fa-trash-o"></i>
+ <button type="button" class="btn btn-danger btn-xs delete" id="{{ $doctor['id'] }}"><i class="fa fa-trash-o"></i>
  </button>
  </td>
  </tr>

@@ -2,8 +2,8 @@
 <tr>
 	<td>{{ $row['name'] }}</td>
 	@foreach($specialist as $value)
-	@if($value['id'] == $row['id_specialist'])
-	<td>{{ $value['name_specialist'] }}</td>
+	@if($value->id == $row['id_specialist'])
+	<td>{{ $value->name_specialist }}</td>
 	@endif
 	@endforeach
 	<td>{{ $row['weeksday'] }}</td>

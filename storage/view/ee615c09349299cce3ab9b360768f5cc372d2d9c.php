@@ -23,26 +23,26 @@
 							<div class="blog-date text-center">
 								<i class="pe-7s-link"></i>
 							</div>
-							<div class="blog-img"><a href="#"><img src="../img/blog/<?php echo e($blog['image']); ?>" alt=""></a>
+							<div class="blog-img"><a href="#"><img src="../img/blog/<?php echo e($blog->image); ?>" alt=""></a>
 								<div class="blog-event-date">
-									<h3><?php echo e(date('d', strtotime($blog['time_post']))); ?> <small><?php echo e(date('M', strtotime($blog['time_post']))); ?></small></h3>
+									<h3><?php echo e(date('d', strtotime($blog->time_post))); ?> <small><?php echo e(date('M', strtotime($blog->time_post))); ?></small></h3>
 								</div>
 							</div>
 							<div class="blog-content">
-								<a href="#"><h4><?php echo e($blog['blog_name']); ?></h4></a>
+								<a href="#"><h4><?php echo e($blog->blog_name); ?></h4></a>
 								<?php
 								$d = 0;
 								foreach($listComment as $row)
 								{
-									if($row['id_blog'] == $blog['id'])
+									if($row->id_blog == $blog->id)
 									{
 										$d++;
 									}
 								}
 								?>
 								<i class="fa fa-user-o"></i> <a href="#">Admin</a> | <i class="fa fa-comment-o"></i><a href="#"> Bình luận: <?php echo $d;  ?></a>
-								<p><?php echo e($blog['content']); ?></p>
-								<a href="../BlogController/getBlog/<?php echo e($blog['id']); ?>" class="btn btn-simple">Đọc tiếp</a>
+								<p><?php echo e($blog->content); ?></p>
+								<a href="../BlogController/getBlog/<?php echo e($blog->id); ?>" class="btn btn-simple">Đọc tiếp</a>
 
 							</div>
 						</div>

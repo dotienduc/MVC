@@ -2,8 +2,8 @@
 <tr>
 	<td><?php echo e($row['name']); ?></td>
 	<?php $__currentLoopData = $specialist; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-	<?php if($value['id'] == $row['id_specialist']): ?>
-	<td><?php echo e($value['name_specialist']); ?></td>
+	<?php if($value->id == $row['id_specialist']): ?>
+	<td><?php echo e($value->name_specialist); ?></td>
 	<?php endif; ?>
 	<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 	<td><?php echo e($row['weeksday']); ?></td>

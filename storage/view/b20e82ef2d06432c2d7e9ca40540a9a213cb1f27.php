@@ -49,7 +49,7 @@
 								<select name="id_specialist" id="subject" class="form-control action" required="required">
 									<option value="">Chọn khoa</option>
 									<?php $__currentLoopData = $specialist; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-									<option value="<?php echo e($row['id']); ?>"><?php echo e($row['name_specialist']); ?></option>
+									<option value="<?php echo e($row->id); ?>"><?php echo e($row->name_specialist); ?></option>
 									<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 								</select>
 							</div>

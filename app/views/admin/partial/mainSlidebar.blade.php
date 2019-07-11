@@ -9,11 +9,11 @@
             </div>
             <div class="info">
                 <h4>Welcome</h4>
-                <p>{{ $infoAccount['name'] }}</p>
+                <p>{{ $infoAccount[0]->name}}</p>
             </div>
         </div>
 
-        @if( isset($_SESSION['info']) && $_SESSION['info']['role'] == 1 )
+        @if( isset($_SESSION['info']) && $_SESSION['info'][0]->role == 1 )
         <!-- sidebar menu -->
         <ul class="sidebar-menu">
             <li class="active">
@@ -132,11 +132,11 @@
             </div>
             <div class="info">
                 <h4>Welcome</h4>
-                <p>{{ $infoAccount['name'] }}</p>
+                <p>{{ $infoAccount[0]->name }}</p>
             </div>
         </div>
 
-        @if( isset($_SESSION['info']) && $_SESSION['info']['role'] == 1 )
+        @if( isset($_SESSION['info']) && $_SESSION['info'][0]->role == 1 )
         <!-- sidebar menu -->
         <ul class="sidebar-menu">
             <li class="active">

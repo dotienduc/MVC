@@ -31,7 +31,7 @@
 								</ul>
 							</div>
 							<div class="team-content">
-								<h4><a href="../bacsiController/viewProfileDoctor/{{ $doctor['id_doctor'] }}">{{ $doctor['name'] }}</a></h4>
+								<h4><a href="../bacsiController/viewProfileDoctor/{{ $doctor['id'] }}">{{ $doctor['name'] }}</a></h4>
 								<h6>{{ $doctor['name_specialist'] }}</h6>
 							</div>
 							<div class="timetable">
@@ -47,7 +47,7 @@
 									<div class="label">Sunday</div>
 									<div class="value">12:00 - 14:00</div>
 								</div>
-								<a href="../bacsiController/viewProfileDoctor/{{ $doctor['id_doctor'] }}" class="btn-theme text-center btn-block"> Xem hồ sơ</a>
+								<a href="../bacsiController/viewProfileDoctor/{{ $doctor['id'] }}" class="btn-theme text-center btn-block"> Xem hồ sơ</a>
 							</div>
 						</div>
 					</div>

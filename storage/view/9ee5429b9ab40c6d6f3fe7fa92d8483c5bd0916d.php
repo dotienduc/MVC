@@ -7,16 +7,16 @@
     <div class="col-sm-10">
         <div class="comment">
             <h5>
-                <?php echo e($comment['comment_sender_name']); ?>
+                <?php echo e($comment->comment_sender_name); ?>
 
-                <span><?php echo e($comment['date']); ?> / <a href="#" class="reply" id="<?php echo e($comment['id']); ?>">Reply</a></span>
+                <span><?php echo e($comment->date); ?> / <a href="#" class="reply" id="<?php echo e($comment->id); ?>">Reply</a></span>
             </h5>
-            <p><?php echo e($comment['comment']); ?> </p>
+            <p><?php echo e($comment->comment); ?> </p>
         </div>
     </div>
 </div>
 <?php $__currentLoopData = $comments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-<?php if($value['parent_commnet_id'] == $comment['id']): ?>
+<?php if($value->parent_commnet_id == $comment->id): ?>
 <!-- Blog Comments -->
 <div class="row blog-comments blog-comments-reply margin-bottom-30">
     <div class="col-sm-2">
@@ -25,11 +25,11 @@
     <div class="col-sm-10">
         <div class="comment">
             <h5>
-                <?php echo e($value['comment_sender_name']); ?>
+                <?php echo e($value->comment_sender_name); ?>
 
-                <span><?php echo e($value['date']); ?>/span>
+                <span><?php echo e($value->date); ?></span>
             </h5>
-            <p><?php echo e($value['comment']); ?></p>
+            <p><?php echo e($value->comment); ?></p>
         </div>
     </div>
 </div>

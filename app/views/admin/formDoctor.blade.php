@@ -53,7 +53,7 @@
 								<label>Chuyên khoa</label>
 								<select name="specialist" class="form-control" required="required">
 									@foreach($specialist as $row)
-									<option value="{{$row['id']}}">{{$row['name_specialist']}}</option>
+									<option value="{{ $row->id }}">{{ $row->name_specialist }}</option>
 									@endforeach
 								</select>
 							</div>

@@ -83,39 +83,6 @@
                             </div>
                         </div>
                     </div>
-                <div class="row">
-                        <!-- datamap -->
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 ">  
-                            <div class="panel panel-bd lobidrag">
-                                <div class="panel-heading">
-                                    <div class="panel-title">
-                                        <h4>Line chart</h4>
-                                    </div>
-                                </div>
-                                <div class="panel-body">
-                                    <canvas id="lineChart" height="150"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- calender -->
-                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
-                            <div class="panel panel-bd lobidisable">
-                                <div class="panel-heading">
-                                    <div class="panel-title">
-                                        <h4>Calender</h4>
-                                    </div>
-                                </div>
-                                <div class="panel-body">
-                                    <!-- monthly calender -->
-                                    <div class="monthly_calender">
-                                        <div class="monthly" id="m_calendar"></div>
-                                    </div>
-                                </div>
-                                 <div id="map1" class="hidden-xs hidden-sm hidden-md hidden-lg"></div>
-                            </div>
-                        </div>
-                        
-                    </div> <!-- /.row -->
                 </section> <!-- /.content -->
 
             </div> <!-- /.content-wrapper -->

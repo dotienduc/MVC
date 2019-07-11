@@ -44,29 +44,29 @@
 				<div class="col-md-10 col-md-offset-1">
 					<div class="blog-item">
 						<div class="blog-images">
-							<div class="blog-img"><a href="#"><img src="../../img/shop/<?php echo e($product['image']); ?>" alt=""></a></div>
+							<div class="blog-img"><a href="#"><img src="../../img/shop/<?php echo e($product->image); ?>" alt=""></a></div>
 						</div>
 						<div class="blog-content">
-							<a href="#"><h4><?php echo e($product['name']); ?></h4></a>
+							<a href="#"><h4><?php echo e($product->name); ?></h4></a>
 							<div class="blog-date margin-bottom-20 margin-top-30">
-								<?php if($product['promotion_price'] == 0): ?>
-								<h3>$ <?php echo e($product['unit_price']); ?><sub>/Only</sub></h3>
+								<?php if($product->promotion_price == 0): ?>
+								<h3>$ <?php echo e($product->unit_price); ?><sub>/Only</sub></h3>
 								<?php else: ?>
-								<h3 >$ <del class="text-muted"> <?php echo e($product['unit_price']); ?> </del><?php echo e($product['promotion_price']); ?><sub>/Only</sub></h3>
+								<h3 >$ <del class="text-muted"> <?php echo e($product->unit_price); ?> </del><?php echo e($product->promotion_price); ?><sub>/Only</sub></h3>
 								<?php endif; ?>
 							</div>
-							<p><?php echo e($product['description']); ?></p>
-							<input type="hidden" name="hidden_image" id="image<?php echo e($product['id']); ?>" value="<?php echo e($product['image']); ?>">
-							<input type="hidden" name="hidden_name" id="name<?php echo e($product['id']); ?>" value="<?php echo e($product['name']); ?>">
-							<?php if($product['promotion_price'] == 0): ?>
-							<input type="hidden" name="hidden_UnitPrice" id="unit_price<?php echo e($product['id']); ?>" value="<?php echo e($product['unit_price']); ?>">
-							<input type="hidden" name="hidden_PromotionPrice" id="promotion_price<?php echo e($product['id']); ?>" value="0">
+							<p><?php echo e($product->description); ?></p>
+							<input type="hidden" name="hidden_image" id="image<?php echo e($product->id); ?>" value="<?php echo e($product->image); ?>">
+							<input type="hidden" name="hidden_name" id="name<?php echo e($product->id); ?>" value="<?php echo e($product->name); ?>">
+							<?php if($product->promotion_price == 0): ?>
+							<input type="hidden" name="hidden_UnitPrice" id="unit_price<?php echo e($product->id); ?>" value="<?php echo e($product->unit_price); ?>">
+							<input type="hidden" name="hidden_PromotionPrice" id="promotion_price<?php echo e($product->id); ?>" value="0">
 							<?php else: ?>
-							<input type="hidden" name="hidden_PromotionPrice" id="promotion_price<?php echo e($product['id']); ?>" value="<?php echo e($product['promotion_price']); ?>">
-							<input type="hidden" name="hidden_UnitPrice" id="unit_price<?php echo e($product['id']); ?>" value="0">
+							<input type="hidden" name="hidden_PromotionPrice" id="promotion_price<?php echo e($product->id); ?>" value="<?php echo e($product->promotion_price); ?>">
+							<input type="hidden" name="hidden_UnitPrice" id="unit_price<?php echo e($product->id); ?>" value="0">
 							<?php endif; ?>
-							<input type="hidden" name="hidden_quantity" id="quantity<?php echo e($product['id']); ?>" value="1">
-							<a href="#" class="btn btn-simple add_cart" id="<?php echo e($product['id']); ?>">Add to Cart</a>
+							<input type="hidden" name="hidden_quantity" id="quantity<?php echo e($product->id); ?>" value="1">
+							<a href="#" class="btn btn-simple add_cart" id="<?php echo e($product->id); ?>">Add to Cart</a>
 							<a href="../../ShopController/checkout" class="btn btn-simple">Buy Now</a>
 						</div>
 					</div>

@@ -119,7 +119,7 @@
                     <select name="id_specialist" id="subject" class="form-control action" >
                       <option value="">Chọn khoa</option>
                       @foreach($specialist as $row)
-                      <option value="{{ $row['id'] }}">{{ $row['name_specialist'] }}</option>
+                      <option value="{{ $row->id }}">{{ $row->name_specialist }}</option>
                       @endforeach
                     </select>
                   </div>

@@ -112,6 +112,7 @@
 										</select>
 									</div>
 									<div class="reset button">
+										<input type="hidden" id="hidden_weeksday" name="hidden_weeksday">
 										<input type="hidden" id="hidden_time" name="hidden_time">
 										<input type="hidden" id="hidden_idTimeserving" name="hidden_idTimeserving">
 										<input type="hidden" id="hidden_idDoctor" name="hidden_idDoctor">
@@ -168,6 +169,7 @@
 						var name_doctor = e.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.textContent;
 						var speciacal = e.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.textContent;
 					}
+					$('#hidden_weeksday').val(weeksday);
 					$('#doctor_name').text(name_doctor);
 					$('#speciacal').text(speciacal);
 					$('#weeksday').val(weeksday);
@@ -237,25 +239,24 @@
 						}
 					});
 				});
+				$(".change").change(function(e) {
+					if($(this).val() != '')
+					{
+						var weeksday = $('#hidden_weeksday').val();
+						var time = $('#hidden_time').val();
+						var query = $(this).val();
+						$.ajax({
+							url: "../ScheduleController/selectTimework",
+							method: "POST",
+							data: {query: query, time: time, weeksday: weeksday},
+							success:function(data)
+							{
+								$('#work_time').html(data);
+							}
+						});
+					}
+				});
 			});
 		</script>
 		<script src="jquery.lwMultiSelect.js"></script>
-		<script type="text/javascript">
-			$(".change").change(function(e) {
-				if($(this).val() != '')
-				{
-					var time = $('#hidden_time').val();
-					var query = $(this).val();
-					$.ajax({
-						url: "../ScheduleController/selectTimework",
-						method: "POST",
-						data: {query: query, time: time},
-						success:function(data)
-						{
-							$('#work_time').html(data);
-						}
-					});
-				}
-			});
-		</script>
 		@endsection

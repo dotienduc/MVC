@@ -2,57 +2,67 @@
 use Jenssegers\Blade\Blade;
 use App\core\Controller;
 
+use App\LibraryDatabase\QueryBuilder;
+use App\model\Blog;
+use App\model\Comment;
+
 class BlogController extends Controller
 {
 	private $blog;
+	private $comment;
 
 	public function __construct()
 	{
-		$this->blog = $this->model('Blog');
+		$this->blog 	= new Blog;
+		$this->comment 	= new Comment;
 	}
 
-	//Function display list blog
+	//Display list blog
 	public function blog()
 	{
-		//Get list blog from model Blog
-		$blogs = $this->blog->getListBlog();
+		//Get all data object blog
+		$blogs 		 	= $this->blog->findAll();
 
-		//Get list comment from model Blog
-		$listComment = $this->blog->listComments();
+		//Get all data object comment
+		$listComments  	= $this->comment->findAll();
 
-		$this->render('home.danhSachBlog', ['blogs' => $blogs, 'listComment' => $listComment]);
+		$this->render('home.danhSachBlog', ['blogs' => $blogs, 'listComment' => $listComments]);
 	}
 
-	//Function display detail blog
+	//Display detail blog
 	public function getBlog($id)
 	{
-		//Get list blog from Model Blog
-		$blog = $this->blog->getDetailBlog($id);
+		//Get data object blog follow by Id
+		$blog 			= $this->blog->findbyId(['id' => $id]);
 
-		//Get list recentBlog from Model Blog
-		$recentBlogs = $this->blog->getRecentPosts($id);
+		$recentBlogs 	= QueryBuilder::table('blog')
+						->where('id', '!=', $id)
+						->orderBy('id', 'desc')
+						->limit(3)
+						->get();
 
 		$this->render('home.chiTietBlog', ['blog' => $blog, 'id' => $id,
-			'recentBlogs' => $recentBlogs
-		]);
+			'recentBlogs' => $recentBlogs]);
 	}
 
-	//Function display list comment
+	//Display list comment
 	public function getListComments()
 	{
-		//Get parent comment from model Blog
-		$listComment = $this->blog->getComments($_POST['id_blog']);
+		//Get detail data object blog follow Id
+		$blog = $this->blog->findById(['id' => $_POST['id_blog']]);
 
+		//Get comment parent
+		$listComment = $this->comment->getCommentParent(['id_blog' => $blog->id, 'parent_commnet_id' => 0]);
 
-		//Get all comment from model Blog
-		$comments = $this->blog->getAllComment($_POST['id_blog']);
+		//Get all comment of blog 
+		$comments = $this->blog->findById(['id' => $_POST['id_blog']])->comments();
 
 		$this->render('home.dataAjax.loadDataComment', ['listComment' => $listComment, 
 			'comments' => $comments
 		]);
 	}
 
-	//Function add comment
+	//Add comment
 	public function addComment()
 	{
 		$name = "";
@@ -81,9 +91,14 @@ class BlogController extends Controller
 
 		if($error == "")
 		{
-
-			//Add comment to database 
-			$this->blog->addComment($parent_id_comment, $comment, $name, $id_blog, $date);
+			//Insert comment 
+			$this->comment->parent_commnet_id 		= $parent_id_comment;
+			$this->comment->comment           		= $comment;
+			$this->comment->comment_sender_name	= $name;
+			$this->comment->id_blog 				= $id_blog;
+			$this->comment->date 					= $date;
+			
+			$this->comment->save();
 			$error = '<label class="alert alert-success">Comment Added</label>';
 		}
 

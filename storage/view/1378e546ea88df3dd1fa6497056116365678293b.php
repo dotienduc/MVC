@@ -68,12 +68,12 @@
         <?php $__currentLoopData = $banners; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
         <div class="item">
             <!-- Slide Background -->
-            <img src="../img/bg/<?php echo e($row['image']); ?>" alt="Slider Images"  class="slide-image"/>
+            <img src="../img/bg/<?php echo e($row->image); ?>" alt="Slider Images"  class="slide-image"/>
             <div class="bs-slider-overlay"></div>
 
             <div class="slide-text slide_style_left">
-                <h1 data-animation="animated fadeInRight"> <span class="color-defult"> <?php echo e($row['text1']); ?></span></h1>
-                <p data-animation="animated fadeInLeft"><?php echo e($row['text2']); ?>.</p>
+                <h1 data-animation="animated fadeInRight"> <span class="color-defult"> <?php echo e($row->text1); ?></span></h1>
+                <p data-animation="animated fadeInLeft"><?php echo e($row->text2); ?>.</p>
                 <a href="#" target="_blank" class="btn btn-default" data-animation="animated fadeInLeft">Read more</a>
                 <a href="#" target="_blank"  class="btn btn-primary" data-animation="animated fadeInRight">Book Now</a>
             </div>
@@ -199,7 +199,7 @@
                                     <select name="subject" id="subject" class="form-control action" required="required">
                                         <option value="">Chủ đề</option>
                                         <?php $__currentLoopData = $specialist; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <option value="<?php echo e($row['id']); ?>"><?php echo e($row['name_specialist']); ?></option>
+                                        <option value="<?php echo e($row->id); ?>"><?php echo e($row->name_specialist); ?></option>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </select>
                                 </div>

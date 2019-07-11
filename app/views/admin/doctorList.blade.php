@@ -48,7 +48,7 @@
        <div class="panel panel-bd lobidrag">
         <div class="panel-heading">
           <div class="btn-group"> 
-            @if( isset($_SESSION['info']) && $_SESSION['info'] === 1 )
+            @if( isset($_SESSION['info']) && $infoAccount[0]->role == 1 )
             <a class="btn btn-success" href="../BacsiController/formDoctor"> <i class="fa fa-plus"></i> Thêm bác sĩ
             </a>  
             @endif
@@ -130,7 +130,7 @@
                     <label>Specialist</label>
                     <select name="specialist" id="specialist" class="form-control" required="required">
                       @foreach($specialist as $row)
-                      <option value="{{ $row['id'] }}">{{ $row['name_specialist'] }}</option>
+                      <option value="{{ $row->id }}">{{ $row->name_specialist }}</option>
                       @endforeach
                     </select>
                   </div>
@@ -219,7 +219,7 @@
         success:function(data)
         {
           $('#name').val(data.name);
-          $('#hidden_id').val(data.id_doctor);
+          $('#hidden_id').val(data[0]);
           $('#image').attr('src', "../img/team/"+data.image+"");
           $('#old_picture').val(data.image);
           $('#specialist').val(data.id_specialist);

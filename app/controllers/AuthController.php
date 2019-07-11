@@ -1,14 +1,15 @@
 <?php
 
 use App\core\Controller;
+use App\model\User;
 
 class AuthController extends Controller
 {
-	private $auth;
+	private $user;
 
 	public function __construct()
 	{
-		$this->auth = $this->model('Auth');
+		$this->user = new User;
 	}
 
 	//Function login 
@@ -16,14 +17,26 @@ class AuthController extends Controller
 	{
 		$username = $_POST['username'];
 		$password = $_POST['password'];
-		if($this->auth->checkAuth($username, $password) !== [])
+
+		//Get object user
+		$user = $this->user->findAll(['name' => $_POST['username'], 'password' => $_POST['password'],
+				 'status' => '1']);
+		
+		if(count((array) $user) > 0)
 		{
-			$_SESSION['auth'] = $username;
-			$_SESSION['info'] = $this->auth->checkAuth($username, $password);
-			header('location: http://localhost/mvc/public/DashboardController/dashBoard');
+			$_SESSION['auth'] = $user[0]->name;
+			$_SESSION['info'] = $user;
+
+			//Redirect to dashboard page
+			$this->redirect('http://localhost/mvc/public/DashboardController/dashBoard');
 			exit();
 		}else{
-			header('location: http://localhost/mvc/public/DashboardController/login');
+
+			/*
+				Redirect to login page 
+				if account not exists
+			*/
+			$this->redirect('location: http://localhost/mvc/public/DashboardController/login');
 			exit();
 		}
 	}

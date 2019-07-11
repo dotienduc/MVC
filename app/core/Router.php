@@ -5,48 +5,55 @@ namespace App\core;
 class Router
 {
 
+	//Controller default
 	protected $controller = 'home';
 
+	//Method default
 	protected $method = 'index';
 
 	protected $params = [];
 
+	//This routers will store router have been registration
 	private static $routers = [];
 
 	public function __construct(){}
 
+	//Add route when regist in file Routers of folder App 
 	private static function addRoute($url)
 	{
 		self::$routers[] = $url;
 	}
 
+	//Function register route
 	public static function register($url)
 	{
-		self::addRoute($url);
+		self::addRoute($url);//Add route
 	}
 
+	//Mapping 
 	public function map()
 	{
-		$routers = static::$routers;
+		$routers = static::$routers;// Get routers
 
-		$requestURI = $this->parseURL();
+		$requestURI = $this->parseURL(); // Get URL have parsed
 
-		$checkRoute = false;
+		$checkRoute = false; 
+
 		foreach ($routers as $route) {
 
-			$route = explode('/', $route);
+			$route = explode('/', $route); 
 
-			array_shift($route);
+			array_shift($route); 
 
 			if( count($route) != count($requestURI) )
 			{
 				continue;
 			}
 
-
 			if( strcmp(strtolower($route[0]), strtolower($requestURI[0])) === 0 )
 			{
 				$this->controller = $route[0];
+
 				Registry::getInstance()->controller = $this->controller;
 				unset($route[0]);
 			}else
@@ -86,6 +93,7 @@ class Router
 		}
 	}
 
+	//Run function map
 	public function run()
 	{
 		$this->map();

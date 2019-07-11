@@ -47,7 +47,7 @@
        <div class="panel panel-bd lobidrag">
         <div class="panel-heading">
           <div class="btn-group"> 
-            <?php if( isset($_SESSION['info']) && $_SESSION['info'] === 1 ): ?>
+            <?php if( isset($_SESSION['info']) && $infoAccount[0]->role == 1 ): ?>
             <a class="btn btn-success" href="../BacsiController/formDoctor"> <i class="fa fa-plus"></i> Thêm bác sĩ
             </a>  
             <?php endif; ?>
@@ -129,7 +129,7 @@
                     <label>Specialist</label>
                     <select name="specialist" id="specialist" class="form-control" required="required">
                       <?php $__currentLoopData = $specialist; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                      <option value="<?php echo e($row['id']); ?>"><?php echo e($row['name_specialist']); ?></option>
+                      <option value="<?php echo e($row->id); ?>"><?php echo e($row->name_specialist); ?></option>
                       <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </select>
                   </div>
@@ -218,7 +218,7 @@
         success:function(data)
         {
           $('#name').val(data.name);
-          $('#hidden_id').val(data.id_doctor);
+          $('#hidden_id').val(data[0]);
           $('#image').attr('src', "../img/team/"+data.image+"");
           $('#old_picture').val(data.image);
           $('#specialist').val(data.id_specialist);

@@ -4,13 +4,15 @@ use Jenssegers\Blade\Blade;
 use App\core\Controller;
 use App\Authentication;
 
+use App\model\User;
+
 class DashboardController extends Controller
 {
-	private $auth;
+	private $user;
 
 	public function __construct()
 	{
-		$this->auth = $this->model('Auth');
+		$this->user = new User;
 	}
 
 	//Function display dashboard
@@ -27,28 +29,38 @@ class DashboardController extends Controller
 	{
 		if(isset($_SESSION['info']))
 		{
-			$this->middleware($_SESSION['info']['role']);
+			/*
+				Redirect to last page when request invalid
+			*/
+			$this->redirect('javascript://history.go(-1)');
 		}
+
 		$this->render('admin.login');
 	}
 
-	//Function display form register
+	//Display form register
 	public function register()
 	{
 		if(isset($_SESSION['info']))
 		{
-			$this->middleware($_SESSION['info']['role']);
+			$this->redirect('javascript://history.go(-1)');
 		}
+
 		if(isset($_POST['register']))
 		{
 			$username = $_POST['username'];
 			$password = $_POST['password'];
 			$email = $_POST['email'];
 
-			//Add user to database
-			$this->auth->addUser($username, $email, $password);
-			$_SESSION['auth'] = $username;
-			header('location: http://localhost/mvc/public/DashboardController/dashBoard');
+			//Insert new object user;
+			$this->user->name  		= $_POST['username'];
+			$this->user->password 	= $_POST['password'];
+			$this->user->email 		= $_POST['email'];
+
+			$this->user->save();
+
+			//Redirect to login page
+			$this->redirect('http://localhost/mvc/public/DashboardController/login');
 			exit();
 		}
 
@@ -56,22 +68,23 @@ class DashboardController extends Controller
 	}
 	
 
-	//Function logout user
+	//Logout user
 	public function logout()
 	{
 		unset($_SESSION['auth']);
 		session_destroy();
-		header('location: http://localhost/mvc/public/DashboardController/login');
+		$this->redirect('http://localhost/mvc/public/DashboardController/login');
 		exit();
 	}
 
-	//Function display table users
+	//Display table users
 	public function listAccount()
 	{
 		if(isset($_SESSION['info']))
 		{
-			$this->middleware($_SESSION['info']['role']);
+			$this->middleware($_SESSION['info'][0]->role);
 		}
+		
 		$this->render('admin.listAccount', ['infoAccount' => $_SESSION['info']]);
 	}
 }

@@ -60,15 +60,15 @@
             <div class="row">
                 <div class="col-md-9">
                     <div class="margin-bottom-30">
-                        <img class="img-responsive" src="../../img/blog/w2.jpg" alt="">
+                        <img class="img-responsive" src="../../img/blog/{{ $blog->image }}" alt="">
                         <div class="blog-post">
                             <ul class="list-inline blog-info">
-                                <li>By <a href="#">{{ $blog['author'] }}</a></li>
+                                <li>By <a href="#">{{ $blog->author }}</a></li>
                                 <li>In <a href="#">Design</a></li>
-                                <li>Posted {{ date('d-M-Y', strtotime($blog['time_post'])) }}</li>
+                                <li>Posted {{ date('d-M-Y', strtotime($blog->time_post)) }}</li>
                             </ul>
-                            <h3><a href="#">{{ $blog['blog_name'] }}</a></h3>
-                            <p>{{ $blog['content'] }}</p>
+                            <h3><a href="#">{{ $blog->blog_name }}</a></h3>
+                            <p>{{ $blog->content }}</p>
                             <p>Pellentesque eleifend metus vitae commodo finibus. Proin eget mi a sem placerat facilisis. Aenean interdum aliquet sapien, non scelerisque massa vestibulum ut. Quisque mollis, ante nec volutpat dignissim, lectus libero porta magna, at volutpat massa orci a turpis. Duis tincidunt nunc magna, non semper metus tempus ut. Duis vulputate enim condimentum posuere lacinia. Ut venenatis massa ex.</p>
                             <blockquote>
                                 <p>"Lorem ipsum dolor sit amet, consectetur adipiscing duis mollis, est non commodo luctus elit posuere erat a ante. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis lorem ipsum dolor sit amet, consectetur adipiscing"</p>
@@ -101,7 +101,7 @@
                         </div>
 
                         <input type="hidden" name="hidden_id" id="parent_id" value="0">
-                        <input type="hidden" name="id_blog" id="id_blog" value="{{ $blog['id'] }}">                            <p><button type="submit" class="btn btn-theme hvr-bounce-to-top">Submit</button></p>
+                        <input type="hidden" name="id_blog" id="id_blog" value="{{ $blog->id }}">                            <p><button type="submit" class="btn btn-theme hvr-bounce-to-top">Submit</button></p>
                     </form>
                     <!-- End Form -->
                 </div>

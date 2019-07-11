@@ -44,29 +44,29 @@
 				<div class="col-md-10 col-md-offset-1">
 					<div class="blog-item">
 						<div class="blog-images">
-							<div class="blog-img"><a href="#"><img src="../../img/shop/{{ $product['image'] }}" alt=""></a></div>
+							<div class="blog-img"><a href="#"><img src="../../img/shop/{{ $product->image }}" alt=""></a></div>
 						</div>
 						<div class="blog-content">
-							<a href="#"><h4>{{ $product['name'] }}</h4></a>
+							<a href="#"><h4>{{ $product->name }}</h4></a>
 							<div class="blog-date margin-bottom-20 margin-top-30">
-								@if($product['promotion_price'] == 0)
-								<h3>$ {{ $product['unit_price'] }}<sub>/Only</sub></h3>
+								@if($product->promotion_price == 0)
+								<h3>$ {{ $product->unit_price }}<sub>/Only</sub></h3>
 								@else
-								<h3 >$ <del class="text-muted"> {{ $product['unit_price'] }} </del>{{ $product['promotion_price'] }}<sub>/Only</sub></h3>
+								<h3 >$ <del class="text-muted"> {{ $product->unit_price }} </del>{{ $product->promotion_price }}<sub>/Only</sub></h3>
 								@endif
 							</div>
-							<p>{{ $product['description'] }}</p>
-							<input type="hidden" name="hidden_image" id="image{{ $product['id'] }}" value="{{ $product['image'] }}">
-							<input type="hidden" name="hidden_name" id="name{{ $product['id'] }}" value="{{ $product['name'] }}">
-							@if($product['promotion_price'] == 0)
-							<input type="hidden" name="hidden_UnitPrice" id="unit_price{{ $product['id'] }}" value="{{ $product['unit_price'] }}">
-							<input type="hidden" name="hidden_PromotionPrice" id="promotion_price{{ $product['id'] }}" value="0">
+							<p>{{ $product->description }}</p>
+							<input type="hidden" name="hidden_image" id="image{{ $product->id }}" value="{{ $product->image }}">
+							<input type="hidden" name="hidden_name" id="name{{ $product->id }}" value="{{ $product->name }}">
+							@if($product->promotion_price == 0)
+							<input type="hidden" name="hidden_UnitPrice" id="unit_price{{ $product->id }}" value="{{ $product->unit_price }}">
+							<input type="hidden" name="hidden_PromotionPrice" id="promotion_price{{ $product->id }}" value="0">
 							@else
-							<input type="hidden" name="hidden_PromotionPrice" id="promotion_price{{ $product['id'] }}" value="{{ $product['promotion_price'] }}">
-							<input type="hidden" name="hidden_UnitPrice" id="unit_price{{ $product['id'] }}" value="0">
+							<input type="hidden" name="hidden_PromotionPrice" id="promotion_price{{ $product->id }}" value="{{ $product->promotion_price }}">
+							<input type="hidden" name="hidden_UnitPrice" id="unit_price{{ $product->id }}" value="0">
 							@endif
-							<input type="hidden" name="hidden_quantity" id="quantity{{ $product['id'] }}" value="1">
-							<a href="#" class="btn btn-simple add_cart" id="{{ $product['id'] }}">Add to Cart</a>
+							<input type="hidden" name="hidden_quantity" id="quantity{{ $product->id }}" value="1">
+							<a href="#" class="btn btn-simple add_cart" id="{{ $product->id }}">Add to Cart</a>
 							<a href="../../ShopController/checkout" class="btn btn-simple">Buy Now</a>
 						</div>
 					</div>
